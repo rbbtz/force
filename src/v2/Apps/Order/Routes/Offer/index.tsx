@@ -26,10 +26,10 @@ import { track } from "v2/Artsy/Analytics"
 import * as Schema from "v2/Artsy/Analytics"
 import { Router } from "found"
 import React, { Component } from "react"
-import { createFragmentContainer, graphql, RelayProp } from "react-relay"
+import { RelayProp, createFragmentContainer, graphql } from "react-relay"
 import createLogger from "v2/Utils/logger"
 import { Media } from "v2/Utils/Responsive"
-import { offerFlowSteps, OrderStepper } from "../../Components/OrderStepper"
+import { OrderStepper, offerFlowSteps } from "../../Components/OrderStepper"
 
 export interface OfferProps {
   order: Offer_order
@@ -337,6 +337,3 @@ export const OfferFragmentContainer = createFragmentContainer(
     `,
   }
 )
-
-// For bundle splitting in router
-export default OfferFragmentContainer

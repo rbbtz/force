@@ -7,11 +7,11 @@ import { RouteConfig, Router } from "found"
 import React, { Component } from "react"
 import { Media } from "v2/Utils/Responsive"
 import {
-  counterofferFlowSteps,
   OrderStepper,
+  counterofferFlowSteps,
 } from "../../Components/OrderStepper"
 
-import { createFragmentContainer, graphql, RelayProp } from "react-relay"
+import { RelayProp, createFragmentContainer, graphql } from "react-relay"
 
 import { AcceptOfferMutation } from "v2/__generated__/AcceptOfferMutation.graphql"
 import { ConditionsOfSaleDisclaimer } from "v2/Apps/Order/Components/ConditionsOfSaleDisclaimer"
@@ -288,6 +288,3 @@ export const AcceptFragmentContainer = createFragmentContainer(
     `,
   }
 )
-
-// For bundle splitting in router
-export default AcceptFragmentContainer

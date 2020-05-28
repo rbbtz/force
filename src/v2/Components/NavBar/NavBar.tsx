@@ -8,13 +8,13 @@ import {
   Box,
   Button,
   ChevronIcon,
-  color,
   EnvelopeIcon,
   Flex,
   Link,
   SoloIcon,
-  space,
   Spacer,
+  color,
+  space,
   themeProps,
 } from "@artsy/palette"
 
@@ -31,13 +31,13 @@ import {
 } from "./Menus"
 
 import { ModalType } from "v2/Components/Authentication/Types"
-import { menuData, MenuLinkData } from "v2/Components/NavBar/menuData"
+import { MenuLinkData, menuData } from "v2/Components/NavBar/menuData"
 import { openAuthModal } from "v2/Utils/openAuthModal"
 
 import { NavItem } from "./NavItem"
 import { NotificationsBadge } from "./NotificationsBadge"
 
-import { Intent, ContextModule } from "@artsy/cohesion"
+import { ContextModule, Intent } from "@artsy/cohesion"
 import { AnalyticsSchema } from "v2/Artsy"
 import { track, useTracking } from "v2/Artsy/Analytics"
 import Events from "v2/Utils/Events"
@@ -54,7 +54,7 @@ export const NavBar: React.FC = track(
   }
 )(() => {
   const { trackEvent } = useTracking()
-  const { mediator, user, EXPERIMENTAL_APP_SHELL } = useContext(SystemContext)
+  const { mediator, user } = useContext(SystemContext)
   const [showMobileMenu, toggleMobileNav] = useState(false)
   const xs = useMatchMedia(themeProps.mediaQueries.xs)
   const sm = useMatchMedia(themeProps.mediaQueries.sm)
@@ -84,12 +84,8 @@ export const NavBar: React.FC = track(
    * TODO: Find a less naive way to check if route is in appshell
    */
   const handleMobileNavClick = event => {
-    // FIXME: Remove once experimental A/B test completes
-    if (EXPERIMENTAL_APP_SHELL) {
-      // Includes /collect or /collections
-      if (event.target?.parentNode?.href?.includes("/collect")) {
-        toggleMobileNav(false)
-      }
+    if (event.target?.parentNode?.href?.includes("/collect")) {
+      toggleMobileNav(false)
     }
   }
 
@@ -130,9 +126,7 @@ export const NavBar: React.FC = track(
                         AnalyticsSchema.ContextModule.HeaderArtworksDropdown
                       }
                       onClick={() => {
-                        if (EXPERIMENTAL_APP_SHELL) {
-                          setIsVisible(false)
-                        }
+                        setIsVisible(false)
                       }}
                     />
                   </Box>
@@ -165,9 +159,7 @@ export const NavBar: React.FC = track(
                         AnalyticsSchema.ContextModule.HeaderArtistsDropdown
                       }
                       onClick={() => {
-                        if (EXPERIMENTAL_APP_SHELL) {
-                          setIsVisible(false)
-                        }
+                        setIsVisible(false)
                       }}
                     />
                   </Box>

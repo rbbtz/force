@@ -17,9 +17,9 @@ import {
 import { HorizontalPadding } from "v2/Apps/Components/HorizontalPadding"
 import { ArtworkSummaryItemFragmentContainer as ArtworkSummaryItem } from "v2/Apps/Order/Components/ArtworkSummaryItem"
 import {
+  OrderStepper,
   buyNowFlowSteps,
   offerFlowSteps,
-  OrderStepper,
 } from "v2/Apps/Order/Components/OrderStepper"
 import {
   PhoneNumber,
@@ -49,7 +49,7 @@ import {
 import { Router } from "found"
 import { pick } from "lodash"
 import React, { Component } from "react"
-import { createFragmentContainer, graphql, RelayProp } from "react-relay"
+import { RelayProp, createFragmentContainer, graphql } from "react-relay"
 import { get } from "v2/Utils/get"
 import createLogger from "v2/Utils/logger"
 import { Media } from "v2/Utils/Responsive"
@@ -79,7 +79,7 @@ const logger = createLogger("Order/Routes/Shipping/index.tsx")
 export class ShippingRoute extends Component<ShippingProps, ShippingState> {
   state: ShippingState = {
     shippingOption: (this.props.order.requestedFulfillment &&
-      this.props.order.requestedFulfillment.__typename !== "CommerceShip"
+    this.props.order.requestedFulfillment.__typename !== "CommerceShip"
       ? "PICKUP"
       : "SHIP") as CommerceOrderFulfillmentTypeEnum,
     address: this.startingAddress,
@@ -87,8 +87,8 @@ export class ShippingRoute extends Component<ShippingProps, ShippingState> {
     addressTouched: {},
     phoneNumber:
       this.props.order.requestedFulfillment &&
-        (this.props.order.requestedFulfillment.__typename === "CommerceShip" ||
-          this.props.order.requestedFulfillment.__typename === "CommercePickup")
+      (this.props.order.requestedFulfillment.__typename === "CommerceShip" ||
+        this.props.order.requestedFulfillment.__typename === "CommercePickup")
         ? this.props.order.requestedFulfillment.phoneNumber
         : "",
     phoneNumberError: "",
@@ -508,6 +508,3 @@ export const ShippingFragmentContainer = createFragmentContainer(
     `,
   }
 )
-
-// For bundle splitting in router
-export default ShippingFragmentContainer

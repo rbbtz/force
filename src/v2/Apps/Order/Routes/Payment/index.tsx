@@ -5,9 +5,9 @@ import { PaymentRouteSetOrderPaymentMutation } from "v2/__generated__/PaymentRou
 import { HorizontalPadding } from "v2/Apps/Components/HorizontalPadding"
 import { ArtworkSummaryItemFragmentContainer as ArtworkSummaryItem } from "v2/Apps/Order/Components/ArtworkSummaryItem"
 import {
+  OrderStepper,
   buyNowFlowSteps,
   offerFlowSteps,
-  OrderStepper,
 } from "v2/Apps/Order/Components/OrderStepper"
 import { TransactionDetailsSummaryItemFragmentContainer as TransactionDetailsSummaryItem } from "v2/Apps/Order/Components/TransactionDetailsSummaryItem"
 import { TwoColumnLayout } from "v2/Apps/Order/Components/TwoColumnLayout"
@@ -241,6 +241,3 @@ export const PaymentFragmentContainer = createFragmentContainer(
     `,
   }
 )
-
-// For bundle splitting in router
-export default PaymentFragmentContainer

@@ -1,4 +1,4 @@
-import { Title, Flex } from "@artsy/palette"
+import { Flex, Title } from "@artsy/palette"
 import { Conversation_me } from "v2/__generated__/Conversation_me.graphql"
 import { AppContainer } from "v2/Apps/Components/AppContainer"
 import { ConversationFragmentContainer as Conversation } from "v2/Apps/Conversation/Components/Conversation"
@@ -11,22 +11,26 @@ import React, { useContext } from "react"
 import { createFragmentContainer, graphql } from "react-relay"
 import { userHasLabFeature } from "v2/Utils/user"
 import { Media } from "v2/Utils/Responsive"
-import { Conversations_me } from "v2/__generated__/Conversations_me.graphql"
 import {
-  FullHeader,
   ConversationHeader,
+  FullHeader,
 } from "v2/Apps/Conversation/Components/InboxHeaders"
 import { DetailsFragmentContainer as Details } from "../../Components/Details"
 interface ConversationRouteProps {
-  me: Conversations_me & Conversation_me
+  me: Conversation_me
   conversationID: string
   match: Match
 }
+
+/**
+ * FIXME: Added some @ts-ignores to get TypeScript 3.9 updated
+ */
 
 export const ConversationRoute: React.FC<ConversationRouteProps> = props => {
   const { me } = props
   const { user } = useContext(SystemContext)
   const isEnabled = userHasLabFeature(user, "User Conversations View")
+
   if (isEnabled) {
     const route = findCurrentRoute(props.match)
     let maxWidth
@@ -39,17 +43,24 @@ export const ConversationRoute: React.FC<ConversationRouteProps> = props => {
         <Title>Inbox | Artsy</Title>
 
         <Media at="xs">
+          {/* @ts-ignore */}
           <ConversationHeader partnerName={me.conversation.to.name} />
         </Media>
         <Media greaterThan="xs">
+          {/* @ts-ignore */}
           <FullHeader partnerName={me.conversation.to.name} />
         </Media>
         <Flex>
           <Media greaterThan="xs">
-            <Conversations me={me as any} />
+            <Conversations
+              me={me as any}
+              selectedConversationID={me.conversation.internalID}
+            />
           </Media>
+          {/* @ts-ignore */}
           <Conversation conversation={me.conversation} />
           <Details
+            // @ts-ignore
             conversation={me.conversation as any /** FIXME: Correct type */}
             display={["none", null, null, null, "flex"]}
             width={["100%", "376px"]}
@@ -71,6 +82,7 @@ export const ConversationFragmentContainer = createFragmentContainer(
         @argumentDefinitions(conversationID: { type: "String!" }) {
         ...Conversations_me
         conversation(id: $conversationID) {
+          internalID
           to {
             name
           }

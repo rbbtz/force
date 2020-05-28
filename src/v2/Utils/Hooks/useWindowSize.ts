@@ -1,10 +1,10 @@
-import { useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { getViewportDimensions } from "v2/Utils/viewport"
 
 export const useWindowSize = () => {
   const [size, setSize] = useState({ width: 0, height: 0 })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     function resize() {
       const { width, height } = getViewportDimensions()
 

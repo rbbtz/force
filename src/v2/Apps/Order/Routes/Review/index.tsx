@@ -7,9 +7,9 @@ import { ArtworkSummaryItemFragmentContainer as ArtworkSummaryItem } from "v2/Ap
 import { ConditionsOfSaleDisclaimer } from "v2/Apps/Order/Components/ConditionsOfSaleDisclaimer"
 import { ItemReviewFragmentContainer as ItemReview } from "v2/Apps/Order/Components/ItemReview"
 import {
+  OrderStepper,
   buyNowFlowSteps,
   offerFlowSteps,
-  OrderStepper,
 } from "v2/Apps/Order/Components/OrderStepper"
 import { ShippingSummaryItemFragmentContainer as ShippingSummaryItem } from "v2/Apps/Order/Components/ShippingSummaryItem"
 import { TransactionDetailsSummaryItemFragmentContainer as TransactionDetailsSummaryItem } from "v2/Apps/Order/Components/TransactionDetailsSummaryItem"
@@ -22,7 +22,7 @@ import { track } from "v2/Artsy/Analytics"
 import * as Schema from "v2/Artsy/Analytics/Schema"
 import { RouteConfig, Router } from "found"
 import React, { Component } from "react"
-import { createFragmentContainer, graphql, RelayProp } from "react-relay"
+import { RelayProp, createFragmentContainer, graphql } from "react-relay"
 import { data as sd } from "sharify"
 import { get } from "v2/Utils/get"
 import createLogger from "v2/Utils/logger"
@@ -85,7 +85,7 @@ export class ReviewRoute extends Component<ReviewProps, ReviewState> {
         this.props.order.mode === "BUY"
           ? (await this.submitBuyOrder()).commerceSubmitOrder.orderOrError
           : (await this.submitOffer(setupIntentId)).commerceSubmitOrderWithOffer
-            .orderOrError
+              .orderOrError
 
       if (orderOrError.error) {
         this.handleSubmitError(orderOrError.error)
@@ -448,6 +448,3 @@ export const ReviewFragmentContainer = createFragmentContainer(
     `,
   }
 )
-
-// For bundle splitting in router
-export default ReviewFragmentContainer
