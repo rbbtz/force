@@ -12,6 +12,7 @@ import { userIsAdmin } from "v2/Utils/user"
 import Badge from "./Badge"
 import Metadata from "./Metadata"
 import SaveButton from "./Save"
+import { RouterLink } from "v2/Artsy/Router/RouterLink"
 
 let IMAGE_LAZY_LOADING = true
 
@@ -27,7 +28,18 @@ const Image = styled(BaseImage)`
   height: 100%;
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
+
+  /**
+   * HACK: the border here is to hack around an issue where Chrome doesn't
+   * pick up the lazyLoad intersection observer unless there's a border around
+   * the element or some modification to the sub-tree occurs. 'box-sizing' is set
+   * to 'content-box' so the image appears to be the same dimensions.
+   */
+  border: 1px solid transparent;
+  box-sizing: content-box;
 `
 
 interface Props extends React.HTMLProps<ArtworkGridItemContainer> {
@@ -113,8 +125,8 @@ class ArtworkGridItemContainer extends React.Component<Props, State> {
         style={style}
       >
         <Placeholder style={{ paddingBottom: artwork.image.placeholder }}>
-          <a
-            href={artwork.href}
+          <RouterLink
+            to={artwork.href}
             onClick={() => {
               if (this.props.onClick) {
                 this.props.onClick()
@@ -128,7 +140,7 @@ class ArtworkGridItemContainer extends React.Component<Props, State> {
               lazyLoad={IMAGE_LAZY_LOADING && lazyLoad}
               preventRightClick={!isAdmin}
             />
-          </a>
+          </RouterLink>
 
           <Badge artwork={artwork} />
 
