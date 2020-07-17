@@ -5,12 +5,11 @@ import {
   DownloadIcon,
   Flex,
   FlexProps,
-  Image,
   Sans,
   color,
 } from "@artsy/palette"
 import { Message_message } from "v2/__generated__/Message_message.graphql"
-import React from "react"
+import React, { useState } from "react"
 import { createFragmentContainer } from "react-relay"
 import { graphql } from "relay-runtime"
 import { TimeSince } from "./TimeSince"
@@ -56,6 +55,24 @@ interface AttachmentProps {
   textColor: Color
 }
 
+const ImageWrapper: React.FC<{
+  attachment: Message_message["attachments"][0]
+}> = ({ attachment }) => {
+  const [width, setWidth] = useState("100%")
+  return (
+    <img
+      onLoad={event => {
+        let imgElement = event.target as HTMLImageElement
+
+        setWidth(`${imgElement.offsetWidth}px`)
+      }}
+      src={attachment.downloadURL}
+      alt={attachment.fileName}
+      width={width}
+    />
+  )
+}
+
 export const Attachment: React.FC<AttachmentProps> = props => {
   const { attachment, alignSelf, bgColor, textColor } = props
   const isImage = attachment.contentType.startsWith("image")
@@ -74,11 +91,7 @@ export const Attachment: React.FC<AttachmentProps> = props => {
         width={isImage ? "100%" : "min-content"}
       >
         {isImage ? (
-          <Image
-            src={attachment.downloadURL}
-            alt={attachment.fileName}
-            width="100%"
-          />
+          <ImageWrapper attachment={attachment} />
         ) : (
           <>
             <Sans color={textColor} weight="medium" size="4" mr={2}>
