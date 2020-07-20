@@ -54,7 +54,7 @@ export const ConversationRoute: React.FC<ConversationRouteProps> = props => {
       <AppContainer maxWidth={maxWidth}>
         <Title>Inbox | Artsy</Title>
 
-        <Media at="xs">
+        <Media lessThan="sm">
           <ConversationHeader
             showDetails={showDetails}
             setShowDetails={setShowDetails}

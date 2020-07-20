@@ -24,17 +24,23 @@ describe("ViewingRoomsApp", () => {
       response: ViewingRoomsApp_Test_QueryRawResponse = ViewingRoomsAppFixture
     ) => {
       return renderRelayTree({
-        Component: ({ viewingRooms }) => {
+        Component: ({ allViewingRooms, featuredViewingRooms }) => {
           return (
             <MockBoot breakpoint={breakpoint}>
-              <ViewingRoomsApp viewingRooms={viewingRooms} />
+              <ViewingRoomsApp
+                allViewingRooms={allViewingRooms}
+                featuredViewingRooms={featuredViewingRooms}
+              />
             </MockBoot>
           )
         },
         query: graphql`
           query ViewingRoomsApp_Test_Query @raw_response_type {
-            viewingRooms {
-              ...ViewingRoomsApp_viewingRooms
+            allViewingRooms: viewingRooms {
+              ...ViewingRoomsApp_allViewingRooms
+            }
+            featuredViewingRooms: viewingRooms(featured: true) {
+              ...ViewingRoomsApp_featuredViewingRooms
             }
           }
         `,
@@ -51,23 +57,61 @@ describe("ViewingRoomsApp", () => {
       it("renders correct viewing rooms", async () => {
         const wrapper = await getWrapper()
         const html = wrapper.html()
+        expect(wrapper.find("SmallCard").length).toBe(2)
         expect(html).not.toContain("Draft VR")
         expect(html).toContain("Scheduled VR")
         expect(html).toContain("Live VR")
         expect(html).not.toContain("Closed VR")
+      })
+
+      it("renders proper tags", async () => {
+        const wrapper = await getWrapper()
+        const html = wrapper.html()
+        expect(wrapper.find("CardTag").length).toBe(2)
+        expect(html).toContain("Opening soon")
+        expect(html).toContain("3 days left")
+        expect(html).not.toContain("Closed")
+      })
+
+      it("renders proper links to VRs", async () => {
+        const wrapper = await getWrapper()
+        const html = wrapper.html()
+        expect(html).not.toContain(`href="/viewing-room/test-draft"`)
+        expect(html).toContain(`href="/viewing-room/test-scheduled"`)
+        expect(html).toContain(`href="/viewing-room/test-live"`)
+        expect(html).not.toContain(`href="/viewing-room/test-closed"`)
+      })
+    })
+
+    describe("Viewing rooms featured rail", () => {
+      it("renders correct viewing rooms", async () => {
+        const wrapper = await getWrapper()
+        const html = wrapper.html()
+        expect(html).toContain("Featured Live VR")
       })
     })
   })
 })
 
 const ViewingRoomsAppFixture: ViewingRoomsApp_Test_QueryRawResponse = {
-  viewingRooms: {
+  allViewingRooms: {
     edges: [
       {
         node: {
           status: "draft",
           slug: "test-draft",
           title: "Draft VR",
+          heroImageURL: "https://www.example.com/rikki.jpg",
+          distanceToClose: null,
+          distanceToOpen: null,
+          partner: {
+            id: "rikki",
+            name: "Rikki",
+          },
+          artworksConnection: {
+            totalCount: 0,
+            edges: [],
+          },
         },
       },
       {
@@ -75,6 +119,27 @@ const ViewingRoomsAppFixture: ViewingRoomsApp_Test_QueryRawResponse = {
           status: "scheduled",
           slug: "test-scheduled",
           title: "Scheduled VR",
+          heroImageURL: "https://www.example.com/tikki.jpg",
+          distanceToOpen: "soon",
+          distanceToClose: null,
+          partner: {
+            id: "tikki",
+            name: "Tikki",
+          },
+          artworksConnection: {
+            totalCount: 1,
+            edges: [
+              {
+                node: {
+                  id: "hello",
+                  image: {
+                    square: "https://www.example.com/square-mat.jpg",
+                    regular: "https://www.example.com/regular-mat.jpg",
+                  },
+                },
+              },
+            ],
+          },
         },
       },
       {
@@ -82,6 +147,36 @@ const ViewingRoomsAppFixture: ViewingRoomsApp_Test_QueryRawResponse = {
           status: "live",
           slug: "test-live",
           title: "Live VR",
+          heroImageURL: "https://www.example.com/tavi.jpg",
+          distanceToOpen: null,
+          distanceToClose: "3 days",
+          partner: {
+            id: "tavi",
+            name: "Tavi",
+          },
+          artworksConnection: {
+            totalCount: 2,
+            edges: [
+              {
+                node: {
+                  id: "hello",
+                  image: {
+                    square: "https://www.example.com/square-fat.jpg",
+                    regular: "https://www.example.com/regular-fat.jpg",
+                  },
+                },
+              },
+              {
+                node: {
+                  id: "there",
+                  image: {
+                    square: "https://www.example.com/square-pet.jpg",
+                    regular: "https://www.example.com/regular-pet.jpg",
+                  },
+                },
+              },
+            ],
+          },
         },
       },
       {
@@ -89,6 +184,47 @@ const ViewingRoomsAppFixture: ViewingRoomsApp_Test_QueryRawResponse = {
           status: "closed",
           slug: "test-closed",
           title: "Closed VR",
+          heroImageURL: "https://www.example.com/nag.jpg",
+          distanceToOpen: null,
+          distanceToClose: null,
+          partner: {
+            id: "nag",
+            name: "Nag",
+          },
+          artworksConnection: {
+            totalCount: 3,
+            edges: [
+              {
+                node: {
+                  id: "hello",
+                  image: {
+                    square: "https://www.example.com/square-cat.jpg",
+                    regular: "https://www.example.com/regular-cat.jpg",
+                  },
+                },
+              },
+              {
+                node: {
+                  id: "there",
+                  image: {
+                    square: "https://www.example.com/square-bat.jpg",
+                    regular: "https://www.example.com/regular-bat.jpg",
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
+  featuredViewingRooms: {
+    edges: [
+      {
+        node: {
+          status: "live",
+          slug: "test-featured-live",
+          title: "Featured Live VR",
         },
       },
     ],

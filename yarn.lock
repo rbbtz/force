@@ -11,10 +11,10 @@
     lodash "4.17.15"
     prettier "1.19.1"
 
-"@artsy/cohesion@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.19.0.tgz#b24f2809733e66baf9cf4b741340d7d119f273c5"
-  integrity sha512-2sW0ZsJ56ZRvDC4Ayagky3eOYEwdxlR6XPs3KFTU3dLfzc5zXLG36VNSI5tT2G827LnmJun+xXgImVBNuBXf5Q==
+"@artsy/cohesion@1.20.0":
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.20.0.tgz#74cc59e65aab04b22891828ffccdd1be7d91fa16"
+  integrity sha512-TZv3i6nMPh8Rqsi1k53B3kvSIh5muhTx4geFtlHbIeXTitTXlh9dqEhZnTsEwozo8QoY/U3dNpMeid86o+IMOA==
 
 "@artsy/detect-responsive-traits@^0.0.5":
   version "0.0.5"
@@ -40,10 +40,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/gemup/-/gemup-0.0.3.tgz#0397a472bb69432dab3d2d66ca30556815aa96e7"
   integrity sha512-W///stXDTz3jSQw8UtT0BClVk4DLOsVp7a8v12efsEZvrZNT+85YBqPWq2DP1EX3ILZR1hGZhbKr/Gl5uti56Q==
 
-"@artsy/palette@11.7.0":
-  version "11.7.0"
-  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-11.7.0.tgz#e8d21e8499363aab5ab74769296829598fb5dbba"
-  integrity sha512-tZ8P7GozQNeXGAuGXlrOal1ufrzfe8PxylPoieYB0/HYqBrd4DpqZbSVkvyJZwn63QVLoA7T2isa8u05W0IA/w==
+"@artsy/palette@11.9.0":
+  version "11.9.0"
+  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-11.9.0.tgz#ac0495178e6bfea685c16bcd85463df8da460ba1"
+  integrity sha512-q+bE97AJTMPHaLPrj1omwwg1MkTXaMm0I5qQoai6rDpUuX5XgOpZDu2vRk0PuZM2OVMlcsngBtWkTQAHchAiIQ==
   dependencies:
     "@styled-system/theme-get" "^5.1.2"
     babel-plugin-styled-components "^1.10.0"
@@ -56,7 +56,7 @@
     react-powerplug "^1.0.0"
     react-remove-scroll "^2.3.0"
     react-spring "^8.0.27"
-    styled-bootstrap-grid "1.0.4"
+    styled-bootstrap-grid "3.1.0"
     styled-system "^5.1.5"
     trunc-html "^1.1.2"
     use-cursor "^1.2.0"
@@ -20882,10 +20882,10 @@ style-loader@^1.0.0:
     loader-utils "^2.0.0"
     schema-utils "^2.6.6"
 
-styled-bootstrap-grid@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/styled-bootstrap-grid/-/styled-bootstrap-grid-1.0.4.tgz#43417a43097ab00a8f644829f0d11ca226f16455"
-  integrity sha512-4zky8nfXzxzJ9laPTd6kpdYgfdffzk+N5kTjeDCCvnIb4qfSjJ3QfWa9Qf+UdHMA0EPAl4fFjA6keLEq8M2yhA==
+styled-bootstrap-grid@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/styled-bootstrap-grid/-/styled-bootstrap-grid-3.1.0.tgz#955991a7f5a7210c5933dddfcc83707d733737a3"
+  integrity sha512-ouKxAS/WNv7B1NgjX6AVmPytjHNYP56u6qyHXzKFSIkXoSCV9xuCAzD5g4mHikl4q7E4vkTqjqIAd33BWXH5yw==
 
 styled-components@4.3.2:
   version "4.3.2"
@@ -21734,10 +21734,10 @@ typescript-template-language-service-decorator@^2.2.0:
   resolved "https://registry.yarnpkg.com/typescript-template-language-service-decorator/-/typescript-template-language-service-decorator-2.2.0.tgz#4ee6d580f307fb9239978e69626f2775b8a59b2a"
   integrity sha512-xiolqt1i7e22rpqMaprPgSFVgU64u3b9n6EJlAaUYE61jumipKAdI1+O5khPlWslpTUj80YzjUKjJ2jxT0D74w==
 
-typescript@3.9.6:
-  version "3.9.6"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.6.tgz#8f3e0198a34c3ae17091b35571d3afd31999365a"
-  integrity sha512-Pspx3oKAPJtjNwE92YS05HQoY7z2SFyOpHo9MqJor3BXAGNaPUs83CuVp9VISFkSjyRfiTpmKuAYGJB7S7hOxw==
+typescript@3.9.7:
+  version "3.9.7"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
 
 ua-parser-js@0.7.19, ua-parser-js@^0.7.18:
   version "0.7.19"

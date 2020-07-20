@@ -68,14 +68,13 @@ export const NavBar: React.FC = track(
     }
   }, [isMobile])
 
-  /**
-   * Check to see if we're clicking a link that lives within the new app shell
-   * and close the navbar.
-   *
-   * TODO: Find a less naive way to check if route is in appshell
-   */
-  const handleMobileNavClick = event => {
-    if (event.target?.parentNode?.href?.includes("/collect")) {
+  const handleMobileNavClick = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    const target = event.target as HTMLElement
+
+    // Only close MobileNav if the underlying tapped element is a link
+    if (target.parentNode instanceof HTMLAnchorElement) {
       toggleMobileNav(false)
     }
   }
