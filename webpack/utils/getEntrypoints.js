@@ -3,11 +3,12 @@
 const path = require("path")
 const fs = require("fs")
 const { isDevelopment, basePath } = require("../../src/lib/environment")
+const { fromPairs } = require("lodash")
 
 exports.getEntrypoints = () => {
   return {
     ...findAssets("src/desktop/assets"),
-    ...findAssets("src/mobile/assets"),
+    // ...findAssets("src/mobile/assets"),
   }
 }
 
@@ -45,5 +46,20 @@ function findAssets(folder) {
     }
   }, {})
 
-  return assets
+  const allowedAssetsKeys = [
+    "home",
+    "analytics",
+    "authentication",
+    "artsy-v2",
+    "main_layout",
+  ]
+
+  const allowedAssets = fromPairs(
+    Object.entries(assets).filter(([key]) => allowedAssetsKeys.includes(key))
+  )
+
+  console.log("assets:", assets)
+  console.log("allowedAssets:", allowedAssets)
+
+  return allowedAssets
 }
