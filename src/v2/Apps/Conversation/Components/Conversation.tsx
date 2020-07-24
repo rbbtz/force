@@ -218,8 +218,8 @@ const Conversation: React.FC<ConversationProps> = props => {
   return (
     <NoScrollFlex flexDirection="column" width="100%">
       <MessageContainer>
-        <Box>
-          <Spacer mt={["75px", 2]} />
+        <Box pb={[6, 6, 6, 0]}>
+          <Spacer mt={["75px", "75px", 2]} />
           <Flex flexDirection="column" width="100%" px={1}>
             {inquiryItemBox}
             {messageGroups}
@@ -238,10 +238,8 @@ const Conversation: React.FC<ConversationProps> = props => {
 }
 
 const MessageContainer = styled(Box)`
-  height: calc(100% - 300px);
   flex-grow: 1;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: auto;
 `
 
 const NoScrollFlex = styled(Flex)`
