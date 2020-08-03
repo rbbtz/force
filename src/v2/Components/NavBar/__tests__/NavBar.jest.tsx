@@ -37,7 +37,6 @@ describe("NavBar", () => {
   }
 
   beforeEach(() => {
-    jest.spyOn(console, "error").mockImplementation(() => {})
     ;(useTracking as jest.Mock).mockImplementation(() => {
       return {
         trackEvent,
@@ -57,8 +56,8 @@ describe("NavBar", () => {
 
   describe("desktop", () => {
     const defaultLinks = [
-      [undefined, "Artists"],
-      [undefined, "Artworks"],
+      ["/artists", "Artists"],
+      ["/collect", "Artworks"],
       ["/auctions", "Auctions"],
       ["/articles", "Editorial"],
     ]

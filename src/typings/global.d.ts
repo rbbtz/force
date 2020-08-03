@@ -1,7 +1,13 @@
 interface Window {
   analytics?: {
-    page: (object, object) => void
-    identify: (userId: string, email: string, object) => void
+    identify: (userId: string, traits: object, object) => void
+    on: (
+      action: string,
+      cb: (nameOrData: any, data?: object, context?: object) => void
+    ) => void
+    page: (data: object, context: object) => void
+    ready: (cb: () => void) => void
+    reset: () => void
     track: (
       action: string,
       properties: object,
@@ -10,4 +16,6 @@ interface Window {
     __artsyClientSideRoutingReferrer?: string
   }
   __BOOTSTRAP__?: any
+  PARSELY?: any
+  Sailthru?: any
 }
