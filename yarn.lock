@@ -11,10 +11,10 @@
     lodash "4.17.15"
     prettier "1.19.1"
 
-"@artsy/cohesion@1.24.0":
-  version "1.24.0"
-  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.24.0.tgz#bd058c95907dab0138769694101fdddf17ca87a0"
-  integrity sha512-FDGipi91B1Dt5wdvOv4jIJMLtubP3tskijYh4JQn6YglkB3hfpKV5Tz2RkkMAbtOFNMBs3rMbiSmmHM3OEqdQg==
+"@artsy/cohesion@1.26.0":
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.26.0.tgz#6b51002dd744fce632b55b645a4f938f59657219"
+  integrity sha512-/KPhWU9tZfpe1pzFFOmLrpZkV2l4Bnw4KeYY9wsCHt5+cZyL1dGzTJR/DYVCnS8HXXVkLvjP3uWAOw75uxJa4Q==
 
 "@artsy/detect-responsive-traits@^0.0.5":
   version "0.0.5"
@@ -42,10 +42,10 @@
   dependencies:
     uuid "^8.3.0"
 
-"@artsy/palette@11.15.0":
-  version "11.15.0"
-  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-11.15.0.tgz#efc3bb2291f135200360ea61ba8ff37f38263396"
-  integrity sha512-YvRthWTBhRjuuWNqQiR8drZXBM7a1qgsyWEBb4bi8ktlARfiatR+oVTvEmdTuuKJOLoqt9Jud2wEycxsOsFcyQ==
+"@artsy/palette@12.0.1":
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-12.0.1.tgz#447036ab918b7939700fceb96bb3059798347649"
+  integrity sha512-vwRdC+PwRwF+Pr9evRhpLNHY3sbahRupmyzjifDXZ7qzPO5I0u7HBXermp+HplLF80QdDFDgd/7lhWfvVQPp9Q==
   dependencies:
     "@styled-system/theme-get" "^5.1.2"
     babel-plugin-styled-components "^1.10.0"

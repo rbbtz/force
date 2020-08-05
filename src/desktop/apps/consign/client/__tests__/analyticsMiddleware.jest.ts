@@ -19,6 +19,7 @@ describe("analyticsMiddleware", () => {
   let triggerStub
 
   beforeEach(() => {
+    window.analytics = { track: jest.fn() } as any
     triggerStub = sinon.spy()
     const mockAnalytics = analyticsHooks
     mockAnalytics.trigger.mockImplementation(triggerStub)
@@ -32,12 +33,13 @@ describe("analyticsMiddleware", () => {
     })
     store.dispatch({ type: "SUBMIT_ARTIST" })
 
-    expect(triggerStub.callCount).toBe(1)
-    const analyticsArgs = triggerStub.firstCall.args
-    expect(analyticsArgs[0]).toBe("consignment:artist:confirmed")
-    expect(analyticsArgs[1]).toEqual({
-      artistId: "andy-warhol",
-    })
+    expect(window.analytics.track).toHaveBeenCalledTimes(1)
+    expect(window.analytics.track).toBeCalledWith(
+      "consignment_artist_confirmed",
+      {
+        artist_id: "andy-warhol",
+      }
+    )
   })
 
   it("tracks an error on submission creation", () => {
@@ -47,13 +49,14 @@ describe("analyticsMiddleware", () => {
       payload: { errorType: "convection_create" },
     })
 
-    expect(triggerStub.callCount).toBe(1)
-    const analyticsArgs = triggerStub.firstCall.args
-    expect(analyticsArgs[0]).toBe("consignment:submission:error")
-    expect(analyticsArgs[1]).toEqual({
-      type: "convection_create",
-      errors: "Error creating submission",
-    })
+    expect(window.analytics.track).toHaveBeenCalledTimes(1)
+    expect(window.analytics.track).toBeCalledWith(
+      "consignment_failed_to_submit",
+      {
+        errors: "Error creating submission",
+        type: "convection_create",
+      }
+    )
   })
 
   it("tracks an error on submission completion", () => {
@@ -63,13 +66,14 @@ describe("analyticsMiddleware", () => {
       payload: { errorType: "convection_complete_submission" },
     })
 
-    expect(triggerStub.callCount).toBe(1)
-    const analyticsArgs = triggerStub.firstCall.args
-    expect(analyticsArgs[0]).toBe("consignment:submission:error")
-    expect(analyticsArgs[1]).toEqual({
-      type: "convection_complete_submission",
-      errors: "Error completing submission",
-    })
+    expect(window.analytics.track).toHaveBeenCalledTimes(1)
+    expect(window.analytics.track).toBeCalledWith(
+      "consignment_failed_to_submit",
+      {
+        errors: "Error completing submission",
+        type: "convection_complete_submission",
+      }
+    )
   })
 
   it("tracks a submission created with no assets", () => {
@@ -79,14 +83,14 @@ describe("analyticsMiddleware", () => {
       payload: { submissionId: 123 },
     })
 
-    expect(triggerStub.callCount).toBe(1)
-    const analyticsArgs = triggerStub.firstCall.args
-    expect(analyticsArgs[0]).toBe("consignment:submitted")
-    expect(analyticsArgs[1]).toEqual(
-      expect.objectContaining({
-        submissionId: 123,
-      })
-    )
+    expect(window.analytics.track).toHaveBeenCalledTimes(1)
+    expect(window.analytics.track).toBeCalledWith("consignment_submitted", {
+      contextPath: undefined,
+      submissionId: 123,
+      subject: undefined,
+      userId: "some-id",
+      userEmail: "some@email.com",
+    })
   })
 
   it("tracks a submission completed with no assets", () => {
@@ -97,12 +101,13 @@ describe("analyticsMiddleware", () => {
     })
     store.dispatch({ type: "SUBMISSION_COMPLETED" })
 
-    expect(triggerStub.callCount).toBe(1)
-    const analyticsArgs = triggerStub.firstCall.args
-    expect(analyticsArgs[0]).toBe("consignment:completed")
-    expect(analyticsArgs[1]).toEqual({
-      submissionId: 123,
-      assetIds: [],
-    })
+    expect(window.analytics.track).toHaveBeenCalledTimes(1)
+    expect(window.analytics.track).toBeCalledWith(
+      "consignment_asset_uploaded",
+      {
+        submissionId: 123,
+        assetIds: [],
+      }
+    )
   })
 })
