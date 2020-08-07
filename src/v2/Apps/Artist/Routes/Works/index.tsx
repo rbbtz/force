@@ -35,7 +35,10 @@ export const WorksRoute: React.FC<WorksRouteProps> = props => {
 
       <Box>
         {artistSeriesIsEnabled ? (
-          <ArtistSeriesRail artist={artist} />
+          <ArtistSeriesRail
+            artist={artist}
+            title="More series by this artist"
+          />
         ) : (
           <ArtistCollectionsRail artistID={artist.internalID} />
         )}
