@@ -15,6 +15,9 @@ module.exports = {
   ],
   plugins: [
     "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-nullish-coalescing-operator",
+    "@babel/plugin-syntax-dynamic-import",
     [
       "@babel/plugin-proposal-decorators",
       {
@@ -22,16 +25,13 @@ module.exports = {
       },
     ],
     "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-optional-chaining",
-    "@babel/plugin-proposal-nullish-coalescing-operator",
-    "@loadable/babel-plugin",
-    "@babel/plugin-syntax-dynamic-import",
     [
       "relay",
       {
         artifactDirectory: "./src/v2/__generated__",
       },
     ],
+    "@loadable/babel-plugin",
     [
       "babel-plugin-styled-components",
       {
