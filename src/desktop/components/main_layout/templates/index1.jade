@@ -1,0 +1,39 @@
+//- Override any locals with `append locals`
+block locals
+  - defaultOptions = {modal: true, flash: true, stripev3: false, sailthru: true, marketo: true}
+  - options = options ? Object.assign({}, defaultOptions, options) : defaultOptions
+
+doctype html
+html(
+  data-useragent=userAgent
+  data-user-type=sd.CURRENT_USER && sd.CURRENT_USER.type
+  data-lab-features=sd.CURRENT_USER && sd.CURRENT_USER.lab_features && sd.CURRENT_USER.lab_features.join(',')
+  lang="en"
+)
+  head
+    include head
+    block head
+
+    link( type='text/css' rel='stylesheet', href=asset('/assets/main_layout.css') )
+
+    unless styledComponents
+      if assetPackage
+        link( type='text/css' rel='stylesheet', href=asset('/assets/#{assetPackage}.css') )
+
+
+    //- Common bundle
+    script( async rel="preload" src=asset("/assets/runtime-manifest.js") )
+    script( async rel="preload" src=asset("/assets/common.js") )
+
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/Unica77LLWeb-Regular.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/Unica77LLWeb-Medium.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/794c9044-29a1-4d4e-961e-774f21e86764.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/cd6106cf-c21e-4d0b-953e-3905a1b9dece.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/6f903966-2648-436f-8027-84dce5817cbe.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/41e9be24-e4f1-40a2-b51a-fc8f72905b72.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/Unica77LLWeb-Italic.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/Unica77LLWeb-MediumItalic.woff2" type="font/woff2" as="font" crossorigin )
+    link( rel="preload" importance="low" href="https://webfonts.artsy.net/artsy-icons.woff2?uo9ko" type="font/woff2" as="font" crossorigin )
+
+
+

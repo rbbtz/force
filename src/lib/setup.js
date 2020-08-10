@@ -149,6 +149,11 @@ export default function (app) {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
 
+  app.use((req, res, next) => {
+    console.log("d1", Date.now())
+    next()
+  })
+
   // Passport middleware for authentication.
   app.use(
     artsyPassport(
@@ -203,6 +208,7 @@ export default function (app) {
   // Static assets
 
   // Mount static assets from root public folder
+  app.use(logger)
   app.use(express.static("public"))
 
   // Mount static assets from sub-app /app `public` folders
@@ -224,7 +230,7 @@ export default function (app) {
   app.use(backboneErrorHelper)
   app.use(sameOriginMiddleware)
   app.use(escapedFragmentMiddleware)
-  app.use(logger)
+  // app.use(logger)
   app.use(unsupportedBrowserCheck)
   app.use(addIntercomUserHash)
   app.use(pageCacheMiddleware)
@@ -280,6 +286,10 @@ export default function (app) {
       }
     })
 
+    app.use((req, res, next) => {
+      console.log("p1", Date.now())
+      next()
+    })
     // Mount desktop app
     app.use(require("../desktop"))
   }
@@ -294,6 +304,10 @@ export default function (app) {
     err.status = 404
     err.message = "Not Found"
     next(err)
+  })
+  app.use((req, res, next) => {
+    console.log("d9", Date.now())
+    next()
   })
 
   // Error handling

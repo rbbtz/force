@@ -1,4 +1,4 @@
-include ../../prevent_right_click/index
+//- include ../../prevent_right_click/index
 link( rel='apple-touch-icon', href=asset('/images/icon-152.png') )
 link( rel='apple-touch-icon', sizes='120x120', href=asset('/images/icon-120.png') )
 link( rel='apple-touch-icon', sizes='152x152', href=asset('/images/icon-152.png') )
@@ -13,6 +13,9 @@ link( rel='preconnect', href='https://www.googleadservices.com' )
 
 link( rel='dns-prefetch', href='https://connect.facebook.net' )
 link( rel='dns-prefetch', href='https://cdn.segment.com' )
+
+if sd.BROWSER && sd.BROWSER.family != 'Other'
+  link( rel="preconnect" href="#{sd.WEBFONT_URL}" )
 
 meta( charset='utf-8' )
 meta( name="apple-itunes-app" content="app-id=703796080, app-argument=#{sd.APP_URL}#{sd.CURRENT_PATH}" )

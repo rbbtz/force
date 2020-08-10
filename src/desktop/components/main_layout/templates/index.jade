@@ -39,9 +39,13 @@ html(
     //- Javascripts
     #scripts
       include scripts
-      script( src= asset('/assets/main_layout.js') )
+      //- Common bundle
+      script( rel="preload" src=asset("/assets/runtime-manifest.js") )
+      script( rel="preload" src=asset("/assets/common.js") )
+
+      script( rel="preload" src=asset('/assets/main_layout.js') )
 
       if assetPackage
-        script( src=asset('/assets/#{assetPackage}.js') )
+        script( rel="preload" src=asset('/assets/#{assetPackage}.js') )
 
       block scripts

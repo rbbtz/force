@@ -17,23 +17,23 @@ mediator.on("all", (actionName: string, data?: object) =>
   analyticsHooks.trigger(`mediator:${actionName}`, data)
 )
 
-if (sd.SHOW_ANALYTICS_CALLS) {
-  // Log all pageviews
-  window.analytics.on("page", function () {
-    console.info("ANALYTICS PAGEVIEW: ", arguments[2], arguments[3])
-  })
-  // Log all track calls
-  window.analytics.on("track", (actionName: string, data?: any) => {
-    console.info("ANALYTICS TRACK:", actionName, data)
-  })
-  // Log all identify calls
-  window.analytics.on(
-    "identify",
-    (userId: string, data: object, context: any) => {
-      console.info("ANALYTICS IDENTIFY:", userId, data, context)
-    }
-  )
-}
+// if (sd.SHOW_ANALYTICS_CALLS) {
+//   // Log all pageviews
+//   window.analytics.on("page", function () {
+//     console.info("ANALYTICS PAGEVIEW: ", arguments[2], arguments[3])
+//   })
+//   // Log all track calls
+//   window.analytics.on("track", (actionName: string, data?: any) => {
+//     console.info("ANALYTICS TRACK:", actionName, data)
+//   })
+//   // Log all identify calls
+//   window.analytics.on(
+//     "identify",
+//     (userId: string, data: object, context: any) => {
+//       console.info("ANALYTICS IDENTIFY:", userId, data, context)
+//     }
+//   )
+// }
 
 // Send Reaction events to Segment
 Events.onEvent(trackEvent)

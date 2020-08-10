@@ -1,173 +1,165 @@
 - defaultOptions = {grecaptcha: true, stripev3: false, sailthru: true, marketo: true}
 - options = options ? Object.assign({}, defaultOptions, options) : defaultOptions
 
-//- Common bundle
-script( src=asset("/assets/runtime-manifest.js") )
-script( src=asset("/assets/common.js") )
-
-if options.marketo
-  //- Marketo Tracking
-  script(type='text/javascript', src='https://d1s2w0upia4e9w.cloudfront.net/assets/conversionpath-0.3.8.min.js').
-    {
-    "nolog": true,
-    "stageMappings": {
-      "initial": [
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_First_Channel__c"
-        },
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_First_Medium__c"
-        },
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_First_Source_Detail__c"
-        }
-      ],
-      "rolling": [
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_Acquisition_Channel__c"
-        },
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_Acquisition_Medium__c"
-        },
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_Acquisition_Source_Detail__c"
-        }
-      ],
-      "recent": [
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_Recent_Channel__c"
-        },
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_Recent_Medium__c"
-        },
-        {
-          "when": "{referrer.domain}",
-          "matches": "{internal.domain}",
-          "skip": "RC_Recent_Source_Detail__c"
-        }
-      ]
-    },
-    "nameMappings": {
-      "RC_First_Medium__c": "utm_medium_First_Touch__c",
-      "RC_First_Source__c": "utm_source_First_Touch__c",
-      "RC_First_Campaign__c": "utm_campaign_First_Touch__c",
-      "RC_First_Term__c": "utm_term_First_Touch__c",
-      "RC_First_Content__c": "utm_content_First_Touch__c",
-      "RC_First_Source_Detail__c": "Web_Referrer_First_Touch__c",
-      "RC_Acquisition_Medium__c": "utm_medium_Lead_Creation__c",
-      "RC_Acquisition_Source__c": "utm_source_Lead_Creation__c",
-      "RC_Acquisition_Campaign__c": "utm_campaign_Lead_Creation__c",
-      "RC_Acquisition_Term__c": "utm_term_Lead_Creation__c",
-      "RC_Acquisition_Content__c": "utm_content_Lead_Creation__c",
-      "RC_Acquisition_Source_Detail__c": "Web_Referrer_Lead_Creation__c",
-      "RC_Recent_Medium__c": "utm_medium_Most_Recent__c",
-      "RC_Recent_Source__c": "utm_source_Most_Recent__c",
-      "RC_Recent_Campaign__c": "utm_campaign_Most_Recent__c",
-      "RC_Recent_Term__c": "utm_term_Most_Recent__c",
-      "RC_Recent_Content__c": "utm_content_Most_Recent__c",
-      "RC_Recent_Source_Detail__c": "Web_Referrer_Most_Recent__c"
-    },
-    "cookies": {
-      "useCompatibleNames": false
-    },
-    "session": {
-      "duration": {
-        "recent": 30
-      },
-      "internalDomains": {
-        "alternates": [
-          "artsy.space",
-          "artsy.info"
-        ]
-      },
-      "prioritizeNonDirect": {
-        "recent": true
-      }
-    }
-    }
+//- if options.marketo
+//-   //- Marketo Tracking
+//-   script(type='text/javascript', src='https://d1s2w0upia4e9w.cloudfront.net/assets/conversionpath-0.3.8.min.js').
+//-     {
+//-     "nolog": true,
+//-     "stageMappings": {
+//-       "initial": [
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_First_Channel__c"
+//-         },
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_First_Medium__c"
+//-         },
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_First_Source_Detail__c"
+//-         }
+//-       ],
+//-       "rolling": [
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_Acquisition_Channel__c"
+//-         },
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_Acquisition_Medium__c"
+//-         },
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_Acquisition_Source_Detail__c"
+//-         }
+//-       ],
+//-       "recent": [
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_Recent_Channel__c"
+//-         },
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_Recent_Medium__c"
+//-         },
+//-         {
+//-           "when": "{referrer.domain}",
+//-           "matches": "{internal.domain}",
+//-           "skip": "RC_Recent_Source_Detail__c"
+//-         }
+//-       ]
+//-     },
+//-     "nameMappings": {
+//-       "RC_First_Medium__c": "utm_medium_First_Touch__c",
+//-       "RC_First_Source__c": "utm_source_First_Touch__c",
+//-       "RC_First_Campaign__c": "utm_campaign_First_Touch__c",
+//-       "RC_First_Term__c": "utm_term_First_Touch__c",
+//-       "RC_First_Content__c": "utm_content_First_Touch__c",
+//-       "RC_First_Source_Detail__c": "Web_Referrer_First_Touch__c",
+//-       "RC_Acquisition_Medium__c": "utm_medium_Lead_Creation__c",
+//-       "RC_Acquisition_Source__c": "utm_source_Lead_Creation__c",
+//-       "RC_Acquisition_Campaign__c": "utm_campaign_Lead_Creation__c",
+//-       "RC_Acquisition_Term__c": "utm_term_Lead_Creation__c",
+//-       "RC_Acquisition_Content__c": "utm_content_Lead_Creation__c",
+//-       "RC_Acquisition_Source_Detail__c": "Web_Referrer_Lead_Creation__c",
+//-       "RC_Recent_Medium__c": "utm_medium_Most_Recent__c",
+//-       "RC_Recent_Source__c": "utm_source_Most_Recent__c",
+//-       "RC_Recent_Campaign__c": "utm_campaign_Most_Recent__c",
+//-       "RC_Recent_Term__c": "utm_term_Most_Recent__c",
+//-       "RC_Recent_Content__c": "utm_content_Most_Recent__c",
+//-       "RC_Recent_Source_Detail__c": "Web_Referrer_Most_Recent__c"
+//-     },
+//-     "cookies": {
+//-       "useCompatibleNames": false
+//-     },
+//-     "session": {
+//-       "duration": {
+//-         "recent": 30
+//-       },
+//-       "internalDomains": {
+//-         "alternates": [
+//-           "artsy.space",
+//-           "artsy.info"
+//-         ]
+//-       },
+//-       "prioritizeNonDirect": {
+//-         "recent": true
+//-       }
+//-     }
+//-     }
 
 //- Disable Parsely on non-article pages before loading Segment
-script( type="text/javascript" ).
-  if (!location.pathname.match(new RegExp("#{sd.EDITORIAL_PATHS}"))){
-    window.PARSELY = {autotrack: false}
-  }
+//- script( type="text/javascript" ).
+//-   if (!location.pathname.match(new RegExp("#{sd.EDITORIAL_PATHS}"))){
+//-     window.PARSELY = {autotrack: false}
+//-   }
 
 //- Segment.io
-script( type="text/javascript" ).
-  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
-  analytics.load("#{sd.SEGMENT_WRITE_KEY}");
-  }}();
-
-//- Wire up sharify
-if sharify
-  != sharify.script()
+//- script( type="text/javascript" ).
+//-   !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+//-   analytics.load("#{sd.SEGMENT_WRITE_KEY}");
+//-   }}();
 
 //- Stripe
-if options.stripev3
-  script(id="stripe-js", src="https://js.stripe.com/v3/")
-else
-  script(id="stripe-js", src="https://js.stripe.com/v3/", async defer)
+//- if options.stripev3
+//-   script(id="stripe-js", src="https://js.stripe.com/v3/")
+//- else
+//-   script(id="stripe-js", src="https://js.stripe.com/v3/", async defer)
 
 //- Analytics & common asset package
-if sd.BROWSER && sd.BROWSER.family != 'Other'
-  script( src=asset('/assets/analytics.js') )
+//- if sd.BROWSER && sd.BROWSER.family != 'Other'
+//-   script( src=asset('/assets/analytics.js') )
 
 //- Sailthru Horizon JS - user interest data, personalization
-if options.sailthru && sd.SAILTHRU_CUSTOMER_ID
-  script( type="text/javascript" ).
-    (function() {
-      function loadHorizon() {
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = location.protocol + '//ak.sail-horizon.com/spm/spm.v1.min.js';
-        var x = document.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-      }
-      loadHorizon();
-      function loadSailthru() {
-        if(typeof Sailthru !== "undefined" && typeof Sailthru.init === "function"){
-          Sailthru.init({ customerId: sd.SAILTHRU_CUSTOMER_ID });
-        }
-        else{
-          setTimeout(loadSailthru, 250);
-        }
-      }
-      var oldOnLoad = window.onload;
-      window.onload = function() {
-        if (typeof oldOnLoad === 'function') {
-          oldOnLoad();
-        }
-        loadSailthru();
-      };
-    })();
+//- if options.sailthru && sd.SAILTHRU_CUSTOMER_ID
+//-   script( type="text/javascript" ).
+//-     (function() {
+//-       function loadHorizon() {
+//-         var s = document.createElement('script');
+//-         s.type = 'text/javascript';
+//-         s.async = true;
+//-         s.src = location.protocol + '//ak.sail-horizon.com/spm/spm.v1.min.js';
+//-         var x = document.getElementsByTagName('script')[0];
+//-         x.parentNode.insertBefore(s, x);
+//-       }
+//-       loadHorizon();
+//-       function loadSailthru() {
+//-         if(typeof Sailthru !== "undefined" && typeof Sailthru.init === "function"){
+//-           Sailthru.init({ customerId: sd.SAILTHRU_CUSTOMER_ID });
+//-         }
+//-         else{
+//-           setTimeout(loadSailthru, 250);
+//-         }
+//-       }
+//-       var oldOnLoad = window.onload;
+//-       window.onload = function() {
+//-         if (typeof oldOnLoad === 'function') {
+//-           oldOnLoad();
+//-         }
+//-         loadSailthru();
+//-       };
+//-     })();
 
 //- Prefetch links on hover. See: https://instant.page/
-if sd.ENABLE_INSTANT_PAGE
-  include instant-page
+//- if sd.ENABLE_INSTANT_PAGE
+//-   include instant-page
 
 //- Google reCAPTCHA
-if options.grecaptcha && sd.RECAPTCHA_KEY && !sd.EIGEN
-  script( type="text/javascript" ).
-    var loadGrecaptchaOnHome = function() {
-      if (sd.PAGE_TYPE === 'home') {
-        grecaptcha.execute(sd.RECAPTCHA_KEY, {action: 'homepage'})
-      }
-    }
-  script(id="google-recaptcha" src="https://www.google.com/recaptcha/api.js?onload=loadGrecaptchaOnHome&render=#{sd.RECAPTCHA_KEY}" async defer)
+//- if options.grecaptcha && sd.RECAPTCHA_KEY && !sd.EIGEN
+//-   script( type="text/javascript" ).
+//-     var loadGrecaptchaOnHome = function() {
+//-       if (sd.PAGE_TYPE === 'home') {
+//-         grecaptcha.execute(sd.RECAPTCHA_KEY, {action: 'homepage'})
+//-       }
+//-     }
+//-   script(id="google-recaptcha" src="https://www.google.com/recaptcha/api.js?onload=loadGrecaptchaOnHome&render=#{sd.RECAPTCHA_KEY}" async defer)

@@ -1,0 +1,37 @@
+//- Override any locals with `append locals`
+block locals
+  - bodyClass = helpers ? helpers.buildBodyClass(sd, 'body-header-fixed') : '';
+  - defaultOptions = {modal: true, flash: true, stripev3: false, sailthru: true, marketo: true}
+  - options = options ? Object.assign({}, defaultOptions, options) : defaultOptions
+
+body( class=bodyClass )
+  //- Javascripts
+  #sharify
+    //- Wire up sharify
+    if sharify
+      != sharify.script()
+
+  //- Global component mixins
+  include ../../modal/template
+  include ../../flash/template
+
+  //- Header, body block, footer
+  include ../header/templates/index
+
+  main#main
+    #main-layout-container.responsive-layout-container
+      block body
+
+  #scroll-frame-spinner: .loading-spinner
+  include ../footer/template
+
+  //- Javascripts
+  #scripts
+    //- //- Wire up sharify
+    //- if sharify
+    //-   != sharify.script()
+
+    script( rel="preload" src=asset('/assets/main_layout.js') )
+
+    if assetPackage
+      script( rel="preload" src=asset('/assets/#{assetPackage}.js') )

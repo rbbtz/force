@@ -42,7 +42,7 @@ export function syncAuth() {
     $.ajax({
       url: `${sd.API_URL}/api/v1/me`,
       // success: ensureFreshUser, # this can cause an endless reload
-      error() {
+      error(err) {
         $.ajax({
           method: "DELETE",
           url: "/users/sign_out",
