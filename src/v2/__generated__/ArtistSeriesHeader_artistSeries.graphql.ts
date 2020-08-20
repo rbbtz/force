@@ -7,6 +7,8 @@ export type ArtistSeriesHeader_artistSeries = {
     readonly title: string;
     readonly artworksCountMessage: string | null;
     readonly descriptionFormatted: string | null;
+    readonly slug: string;
+    readonly internalID: string;
     readonly image: {
         readonly xs: {
             readonly url: string | null;
@@ -18,11 +20,12 @@ export type ArtistSeriesHeader_artistSeries = {
     } | null;
     readonly artists: ReadonlyArray<{
         readonly name: string | null;
+        readonly slug: string;
+        readonly internalID: string;
         readonly image: {
             readonly url: string | null;
         } | null;
         readonly href: string | null;
-        readonly slug: string;
         readonly " $fragmentRefs": FragmentRefs<"FollowArtistButton_artist">;
     } | null> | null;
     readonly " $refType": "ArtistSeriesHeader_artistSeries";
@@ -40,11 +43,25 @@ var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
+  "name": "slug",
+  "storageKey": null
+},
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "internalID",
+  "storageKey": null
+},
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
   "name": "url",
   "storageKey": null
 },
-v1 = [
-  (v0/*: any*/)
+v3 = [
+  (v2/*: any*/)
 ];
 return {
   "argumentDefinitions": [],
@@ -79,6 +96,8 @@ return {
       "name": "descriptionFormatted",
       "storageKey": "descriptionFormatted(format:\"HTML\")"
     },
+    (v0/*: any*/),
+    (v1/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -110,7 +129,7 @@ return {
           "kind": "LinkedField",
           "name": "cropped",
           "plural": false,
-          "selections": (v1/*: any*/),
+          "selections": (v3/*: any*/),
           "storageKey": "cropped(height:360,version:\"large\",width:360)"
         },
         {
@@ -131,10 +150,10 @@ return {
           "kind": "LinkedField",
           "name": "resized",
           "plural": false,
-          "selections": (v1/*: any*/),
+          "selections": (v3/*: any*/),
           "storageKey": "resized(version:\"normalized\",width:1200)"
         },
-        (v0/*: any*/)
+        (v2/*: any*/)
       ],
       "storageKey": null
     },
@@ -159,6 +178,8 @@ return {
           "name": "name",
           "storageKey": null
         },
+        (v0/*: any*/),
+        (v1/*: any*/),
         {
           "alias": null,
           "args": null,
@@ -166,7 +187,7 @@ return {
           "kind": "LinkedField",
           "name": "image",
           "plural": false,
-          "selections": (v1/*: any*/),
+          "selections": (v3/*: any*/),
           "storageKey": null
         },
         {
@@ -174,13 +195,6 @@ return {
           "args": null,
           "kind": "ScalarField",
           "name": "href",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "slug",
           "storageKey": null
         },
         {
@@ -195,5 +209,5 @@ return {
   "type": "ArtistSeries"
 };
 })();
-(node as any).hash = 'b8723c21790e37b227b7419e250b34ed';
+(node as any).hash = 'f7bbc00a4a3d69bfdb938209e5edbef3';
 export default node;

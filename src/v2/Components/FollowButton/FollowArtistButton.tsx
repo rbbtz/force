@@ -1,16 +1,19 @@
-import { ContextModule, Intent } from "@artsy/cohesion"
+import {
+  FollowedArtistArgs,
+  Intent,
+  followedArtist,
+  unfollowedArtist,
+} from "@artsy/cohesion"
 import { Box, ButtonProps } from "@artsy/palette"
 import { FollowArtistButtonMutation } from "v2/__generated__/FollowArtistButtonMutation.graphql"
 import * as Artsy from "v2/Artsy"
 import { FollowArtistPopoverFragmentContainer as SuggestionsPopover } from "v2/Components/FollowArtistPopover"
-import { extend } from "lodash"
 import React from "react"
 import track, { TrackingProp } from "react-tracking"
 import styled from "styled-components"
 import { FollowArtistButton_artist } from "../../__generated__/FollowArtistButton_artist.graphql"
 import { FollowButton } from "./Button"
 import { FollowButtonDeprecated } from "./ButtonDeprecated"
-import { FollowTrackingData } from "./Typings"
 
 import { ModalOptions, ModalType } from "v2/Components/Authentication/Types"
 import {
@@ -26,7 +29,8 @@ interface Props
   relay?: RelayProp
   artist?: FollowArtistButton_artist
   tracking?: TrackingProp
-  trackingData?: FollowTrackingData
+  trackingData: FollowedArtistArgs
+
   onOpenAuthModal?: (type: ModalType, config?: ModalOptions) => void
 
   /**
@@ -71,31 +75,32 @@ export class FollowArtistButton extends React.Component<Props, State> {
 
   trackFollow = () => {
     const {
+      trackingData,
       tracking,
       artist: { is_followed },
     } = this.props
-    const trackingData: FollowTrackingData = this.props.trackingData || {}
-    const action = is_followed ? "Unfollowed Artist" : "Followed Artist"
 
-    tracking.trackEvent(extend({ action }, trackingData))
+    const action = is_followed
+      ? followedArtist(trackingData)
+      : unfollowedArtist(trackingData)
+    tracking.trackEvent(action)
   }
 
   handleFollow = e => {
     e.preventDefault() // If this button is part of a link, we _probably_ dont want to actually follow the link.
-    const { artist, user, onOpenAuthModal } = this.props
-    const trackingData: FollowTrackingData = this.props.trackingData || {}
+    const { artist, user, onOpenAuthModal, trackingData } = this.props
 
     if (user && user.id) {
       this.followArtistForUser(user)
     } else if (onOpenAuthModal) {
       onOpenAuthModal(ModalType.signup, {
-        contextModule: ContextModule.intextTooltip,
+        contextModule: trackingData.contextModule,
         intent: Intent.followArtist,
         copy: "Sign up to follow artists",
         afterSignUpAction: {
           action: "follow",
           kind: "artist",
-          objectId: (artist && artist.internalID) || trackingData.entity_slug,
+          objectId: artist && artist.internalID, // || trackingData.entity_slug,
         },
       })
     }
