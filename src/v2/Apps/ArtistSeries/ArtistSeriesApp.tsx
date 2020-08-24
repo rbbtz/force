@@ -1,6 +1,6 @@
 import React from "react"
 import { AppContainer } from "v2/Apps/Components/AppContainer"
-import { Box, Separator } from "@artsy/palette"
+import { Box, Separator, Spacer } from "@artsy/palette"
 
 import { SystemContext } from "v2/Artsy"
 import { Footer } from "v2/Components/Footer"
@@ -13,6 +13,8 @@ import { ErrorPage } from "v2/Components/ErrorPage"
 import { ArtistSeriesRailFragmentContainer as OtherArtistSeriesRail } from "v2/Components/ArtistSeriesRail/ArtistSeriesRail"
 import { ArtistSeriesMetaFragmentContainer as ArtistSeriesMeta } from "./Components/ArtistSeriesMeta"
 import { LazyLoadComponent } from "react-lazy-load-image-component"
+import { ContextModule, OwnerType } from "@artsy/cohesion"
+import { Media } from "v2/Utils/Responsive"
 
 interface ArtistSeriesAppProps {
   artistSeries: ArtistSeriesApp_artistSeries
@@ -23,13 +25,19 @@ const ArtistSeriesApp: React.FC<ArtistSeriesAppProps> = ({ artistSeries }) => {
   const isEnabled = userHasLabFeature(user, "Artist Series")
 
   if (isEnabled && artistSeries) {
-    const { railArtist } = artistSeries
+    const { railArtist, internalID, slug } = artistSeries
     return (
       <AppContainer maxWidth="100%">
         {/* NOTE: react-head automatically moves these tags to the <head> element */}
         <ArtistSeriesMeta artistSeries={artistSeries} />
         <ArtistSeriesHeader artistSeries={artistSeries} />
-        <Box m={3}>
+        <Box mx={3}>
+          <Media greaterThan="xs">
+            <Spacer my={3} />
+          </Media>
+          <Media at="xs">
+            <Separator my={2} />
+          </Media>
           <AppContainer>
             <ArtistSeriesArtworksFilter artistSeries={artistSeries} />
             <Separator mt={6} mb={3} />
@@ -44,6 +52,10 @@ const ArtistSeriesApp: React.FC<ArtistSeriesAppProps> = ({ artistSeries }) => {
                 <OtherArtistSeriesRail
                   artist={railArtist[0]}
                   title="More series by this artist"
+                  contextPageOwnerId={internalID}
+                  contextPageOwnerSlug={slug}
+                  contextModule={ContextModule.moreSeriesByThisArtist}
+                  contextPageOwnerType={OwnerType.artistSeries}
                 />
               </LazyLoadComponent>
             )}
@@ -86,6 +98,8 @@ export default createFragmentContainer(ArtistSeriesApp, {
       railArtist: artists(size: 1) {
         ...ArtistSeriesRail_artist
       }
+      internalID
+      slug
       ...ArtistSeriesArtworksFilter_artistSeries
         @arguments(
           acquireable: $acquireable
