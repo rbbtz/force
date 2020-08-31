@@ -22,10 +22,10 @@
     qs "5.2.0"
     underscore "*"
 
-"@artsy/cohesion@1.33.2":
-  version "1.33.2"
-  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.33.2.tgz#b1dfc1f6877a10014a3332846d6b3edda3692db7"
-  integrity sha512-X80SWlVeLVfPatAOR1nCC3VjDj89RdA0bReVgQaaoS5JzHR6Qe/efGxmr3VpHE7iqfiqIcujhLfZjkr2X8/kOg==
+"@artsy/cohesion@1.33.3":
+  version "1.33.3"
+  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.33.3.tgz#3124dd4338ab5c5f6a8f1923920df2a6e437d787"
+  integrity sha512-MrrmamWOvNRiVJwBPQrax40PyFxm+u/6sBHc3VxAZvaybSiEnOynaYX/NkKlSxVZImm8C0WNWfPWrG7D1bdEPg==
 
 "@artsy/detect-responsive-traits@^0.0.5":
   version "0.0.5"
@@ -53,10 +53,10 @@
   dependencies:
     uuid "^8.3.0"
 
-"@artsy/palette@12.3.0":
-  version "12.3.0"
-  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-12.3.0.tgz#8072f8f556b961971e0608d97fa5e18067ffce49"
-  integrity sha512-gaEToAHXqfD7bXIReFNs5yz2i0QwzL3D1EArv/w6S8iijrmDBSd+FQe1d5gDy5vSfxb+GY7JH4PFUMAVZmK/Bw==
+"@artsy/palette@12.4.1":
+  version "12.4.1"
+  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-12.4.1.tgz#09a42d6481473ed88f1d16c3bfd1aaea21838e9b"
+  integrity sha512-RpPeO8i69tUBn0D5JmBHpEDa+MuDcp4FlkLWdVmO0tKZ2wz+eSpti2gAIH1/FRNXDthlpWC66gfuGRBKFDyw0g==
   dependencies:
     "@styled-system/theme-get" "^5.1.2"
     babel-plugin-styled-components "^1.10.0"
@@ -108,10 +108,10 @@
   resolved "https://registry.yarnpkg.com/@artsy/react-html-parser/-/react-html-parser-3.0.2.tgz#6213d662441acf0bd8c9ee953aa77ac8d9cf1cdd"
   integrity sha512-FXiRSqfSvwpz/QgwaqFvjJsbDmo9qMGpvUp/0p1V6muaJbGnfxkTSxAYWmYlFst6bmjhVxCYKxvgQhEVE03Wfg==
 
-"@artsy/reaction@28.2.0":
-  version "28.2.0"
-  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-28.2.0.tgz#793e4f0a8fa56b57efcb56b2d0b11b4a1a859271"
-  integrity sha512-Dz90Ybq5ijz4vhn/vqkESO8gDfKmt2XtToIsw4G7TAK75n3nYNsCq07nEC1fG+LpvwKO3fdEzHFdqa4GvrJjEw==
+"@artsy/reaction@28.4.0":
+  version "28.4.0"
+  resolved "https://registry.yarnpkg.com/@artsy/reaction/-/reaction-28.4.0.tgz#6f186fa45ab99bfbe7bc91a6b80f157dcf8fc762"
+  integrity sha512-LcEvezslMEooxiX2kvHUOsdEjaTVLqq5kuuPqaQVzyEyUmycTx7QnnIbw1ZJHuy7gIiOPWUIbwlJrXcYCzlzJA==
   dependencies:
     "@artsy/detect-responsive-traits" "^0.0.5"
     "@artsy/fresnel" "^1.0.13"
@@ -4509,6 +4509,14 @@
     "@types/react" "*"
     "@types/react-transition-group" "*"
 
+"@types/react-relay@7.0.9":
+  version "7.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react-relay/-/react-relay-7.0.9.tgz#aae453888d5383dc13d7c5b55beb6b5933939ae8"
+  integrity sha512-5wxvzTIA2XatkEvAIBkMtUBlqnhn7kia8sPMYB9YPRTWw/GA4CQ/YFavSfcv5lXc5PH0oQhdRzCMALpa+2yjKw==
+  dependencies:
+    "@types/react" "*"
+    "@types/relay-runtime" "*"
+
 "@types/react-slick@0.23.2":
   version "0.23.2"
   resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.2.tgz#f1c3c6b36b363b8b500ad433f53468428345f802"
@@ -4581,10 +4589,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/relay-runtime@9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@types/relay-runtime/-/relay-runtime-9.1.0.tgz#f7808391131371ca3006bb3cb80e0b3ad681157c"
-  integrity sha512-kQOE1T03BONwF0A62cIY4CCHAOuK0ploH88mPNkhjRr1mJ4v0DkMwZ5enwLyAIeMI9dE2F3ySAFG/lQDcQ3mDQ==
+"@types/relay-runtime@*", "@types/relay-runtime@9.1.6":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@types/relay-runtime/-/relay-runtime-9.1.6.tgz#5a9afc37552d7e5b7966779d33ab26dce7da6771"
+  integrity sha512-rdylQOGAoqjDjtzC2uKdjIqeDRcAvUsjONQB+FZld3cAP9qU4eEwTfMKJ7MdZSw2YbWRcTphczT4OpKKlLxY3Q==
 
 "@types/serve-static@*":
   version "1.13.1"

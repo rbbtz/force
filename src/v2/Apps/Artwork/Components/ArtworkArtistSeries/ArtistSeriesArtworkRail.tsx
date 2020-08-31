@@ -1,11 +1,10 @@
-import { Box, Flex, Sans } from "@artsy/palette"
+import { Flex, Sans } from "@artsy/palette"
 import React from "react"
 import { createFragmentContainer, graphql } from "react-relay"
 import { ArtistSeriesArtworkRail_artwork } from "v2/__generated__/ArtistSeriesArtworkRail_artwork.graphql"
 import { Carousel } from "v2/Components/Carousel"
 import FillwidthItem from "v2/Components/Artwork/FillwidthItem"
 import { StyledLink } from "v2/Apps/Artist/Components/StyledLink"
-import { getENV } from "v2/Utils/getENV"
 import { useTracking } from "react-tracking"
 import {
   ActionType,
@@ -27,15 +26,13 @@ export const ArtistSeriesArtworkRail: React.FC<Props> = ({ artwork }) => {
   }
 
   const artistSeries = artistSeriesConnection.edges[0].node
-  const { artworksConnection, slug } = artistSeries
+  const { filterArtworksConnection, slug } = artistSeries
 
-  const artworks = artworksConnection?.edges?.map(({ node }) => node)
+  const artworks = filterArtworksConnection?.edges?.map(({ node }) => node)
 
   if (!artworks) {
     return null
   }
-
-  const isMobile = getENV("IS_MOBILE") === true
 
   const trackArtworkClick = (artworkSlug, artworkID, index) => {
     const properties: ClickedArtworkGroup = {
@@ -84,33 +81,25 @@ export const ArtistSeriesArtworkRail: React.FC<Props> = ({ artwork }) => {
           </Sans>
         </StyledLink>
       </Flex>
-      <Box mx={[-20, 0]}>
-        <Carousel
-          data={artworks}
-          options={{
-            pageDots: false,
-          }}
-          render={(artwork, index) => {
-            const { image } = artwork
-            return (
-              <Box mb={3} width="auto">
-                <FillwidthItem
-                  artwork={artwork}
-                  onClick={() =>
-                    trackArtworkClick(artwork.slug, artwork.internalID, index)
-                  }
-                  useLighterFont
-                  targetHeight={200}
-                  imageHeight={image?.resized.height}
-                  width={image?.resized.width}
-                  marginRight={5}
-                  marginLeft={isMobile && index === 0 ? 20 : 0}
-                />
-              </Box>
-            )
-          }}
-        />
-      </Box>
+      <Carousel>
+        {artworks.map((artwork, index) => {
+          const { image } = artwork
+          return (
+            <FillwidthItem
+              key={artwork.internalID}
+              contextModule={ContextModule.artistSeriesRail}
+              artwork={artwork}
+              onClick={() =>
+                trackArtworkClick(artwork.slug, artwork.internalID, index)
+              }
+              useLighterFont
+              targetHeight={200}
+              imageHeight={image?.resized.height}
+              width={image?.resized.width}
+            />
+          )
+        })}
+      </Carousel>
     </>
   ) : null
 }
@@ -127,7 +116,7 @@ export const ArtistSeriesArtworkRailFragmentContainer = createFragmentContainer(
             node {
               slug
               internalID
-              artworksConnection(first: 20) {
+              filterArtworksConnection(sort: "-decayed_merch", first: 20) {
                 edges {
                   node {
                     image {
