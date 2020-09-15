@@ -13,5 +13,5 @@ block content
     nav.chevron-nav-list.artists-chevron-nav-list
       each gene in genes
         a.nav-image-item( href="/gene/#{gene.get('id')}/artists")
-          img.artists-nav-item-nav-image( src="#{gene.imageUrl()}")
+          img.artists-nav-item-nav-image( src="https://d7hftxdivxxvm.cloudfront.net/?resize_to=fit&width=200&height=200&quality=95&src=#{gene.imageUrl()}")
           p.artists-page-nav-item-label= gene.get('name')

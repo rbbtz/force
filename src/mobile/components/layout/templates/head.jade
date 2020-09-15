@@ -14,9 +14,18 @@ link( rel='apple-touch-icon', sizes='120x120', href=asset('/images/icon-120.png'
 link( rel='apple-touch-icon', sizes='152x152', href=asset('/images/icon-152.png') )
 link( rel='apple-touch-icon', href=asset('/images/icon-152.png') )
 link( href="#{sd.APP_URL}#{sd.CURRENT_PATH}", rel="canonical" )
+
+link( rel="preload" href=asset("/assets/runtime-manifest.js") as="script" )
+link( rel="preload" href=asset("/assets/common.js") as="script" )
+
 //- Include asset package's CSS
+link( rel="preload" href="//fast.fonts.net/dv2/14/cd6106cf-c21e-4d0b-953e-3905a1b9dece.woff2?d44f19a684109620e484167eaf90e818ba240b6991e48ecb8b406d97abe208b5e173b11663830aa1a32a660b603e78834ed9f11dc9775ab0c2e6df15777ab059d1c7cba170a79aac3a2f51e6dc5b4b7a022c48c080e2a2df559d5f00eea16710c0be3fff1841a97a63ebe298b075e41d3e801fdc3abc84aa6b20756850a6b9ea033e0e2434f54a1c4c86edb450482e5c1438daa55be5030aac36e4c04b533f8f80b3c25a3d2cafb13608be6048ff5880b875915fd005686f337dd3ea348a001aff060a25cc5d6ac80e47870860d5e635298b684d8cdc4f8b3aa9e0b36c879baffa0707ed2fbac52e998a660425ab8e990abab65ba183590fd13eeb62b95c9995f395f7c0fcff557eabd043feace4d588a846ba83e190&projectId=f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741" as="font" type="font/woff2" crossorigin )
+link( rel="preload" href="//fast.fonts.net/dv2/14/794c9044-29a1-4d4e-961e-774f21e86764.woff2?d44f19a684109620e484167eaf90e818ba240b6991e48ecb8b406d97abe208b5e173b11663830aa1a32a660b603e78834ed9f11dc9775ab0c2e6df15777ab059d1c7cba170a79aac3a2f51e6dc5b4b7a022c48c080e2a2df559d5f00eea16710c0be3fff1841a97a63ebe298b075e41d3e801fdc3abc84aa6b20756850a6b9ea033e0e2434f54a1c4c86edb450482e5c1438daa55be5030aac36e4c04b533f8f80b3c25a3d2cafb13608be6048ff5880b875915fd005686f337dd3ea348a001aff060a25cc5d6ac80e47870860d5e635298b684d8cdc4f8b3aa9e0b36c879baffa0707ed2fbac52e998a660425ab8e990abab65ba183590fd13eeb62b95c9995f395f7c0fcff557eabd043feace4d588a846ba83e190&projectId=f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741" as="font" type="font/woff2" crossorigin )
+
 link( type='text/css', rel='stylesheet', href=('//fast.fonts.net/cssapi/f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741.css') )
 link( type='text/css', rel='stylesheet', href=asset('/assets/' + assetPackage + '.css') )
+
+
 
 //- Prefetch major external resources
 link( rel='preconnect', href='https://www.google-analytics.com' )
