@@ -32,6 +32,18 @@ getColor(name)
     error('cannot find: ' + name)
   value
 
+getSpace(keys...)
+  values = ()
+  for key in keys
+    if key == 0 || key == 'auto'
+      push(values, key)
+    else
+      value = THEME.space[key]
+      if value == null
+        error('cannot find: ' + key)
+      push(values, value)
+  values
+
 // Access text treatments
 
 TEXT = THEME.textVariants
