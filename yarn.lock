@@ -53,10 +53,10 @@
   dependencies:
     uuid "^8.3.0"
 
-"@artsy/palette@13.6.0":
-  version "13.6.0"
-  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-13.6.0.tgz#05f5862a6c0c66cf02fc1fc5e48094618c5ebe1b"
-  integrity sha512-Exr4WsALaT1XnPKbpo/E18tiw0dPNE/NaDUefF2wzfwzyUGSh17NiClT8ZSn39hQwJp7R8yPwJg3nQp9P3cwBQ==
+"@artsy/palette@13.7.2":
+  version "13.7.2"
+  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-13.7.2.tgz#d7e57eb41fd7e2f0dacf84b48d557becf29e31a9"
+  integrity sha512-7SH1cacvI3ryYIvjO6sZU4erD8Mq8m6lLNz9oQl+WOf6bSEbAKyZnQJ15pjWj98x8ezPxUvvETd8uRnUhiFruA==
   dependencies:
     "@styled-system/theme-get" "^5.1.2"
     babel-plugin-styled-components "^1.10.0"
@@ -15208,6 +15208,11 @@ jws@^3.2.2:
   dependencies:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
+
+jwt-decode@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-2.2.0.tgz#7d86bd56679f58ce6a84704a657dd392bba81a79"
+  integrity sha1-fYa9VmefWM5qhHBKZX3TkruoGnk=
 
 keyboard-code@0.0.2:
   version "0.0.2"
