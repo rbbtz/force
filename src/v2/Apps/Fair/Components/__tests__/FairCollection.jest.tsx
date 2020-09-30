@@ -3,16 +3,36 @@ import React from "react"
 import { graphql } from "react-relay"
 import { FairCollectionFragmentContainer } from "../FairCollections"
 import { FairCollection_QueryRawResponse } from "v2/__generated__/FairCollection_Query.graphql"
+import { useTracking } from "react-tracking"
+import { RouterLink } from "v2/Artsy/Router/RouterLink"
+import { OwnerType } from "@artsy/cohesion"
+import { AnalyticsContext } from "v2/Artsy/Analytics/AnalyticsContext"
 
 jest.unmock("react-relay")
+jest.mock("react-tracking")
 
 describe("FairCollection", () => {
+  let trackEvent
+
   const getWrapper = async (
     response: FairCollection_QueryRawResponse = FAIR_COLLECTION_FIXTURE
   ) => {
     return renderRelayTree({
       Component: ({ marketingCollection: collection }) => {
-        return <FairCollectionFragmentContainer collection={collection} />
+        return (
+          <AnalyticsContext.Provider
+            value={{
+              contextPageOwnerId: "abc1234",
+              contextPageOwnerSlug: "miart-2020",
+              contextPageOwnerType: OwnerType.fair,
+            }}
+          >
+            <FairCollectionFragmentContainer
+              collection={collection}
+              carouselIndex={2}
+            />
+          </AnalyticsContext.Provider>
+        )
       },
       query: graphql`
         query FairCollection_Query($slug: String!) @raw_response_type {
@@ -27,6 +47,15 @@ describe("FairCollection", () => {
       mockData: response,
     })
   }
+
+  beforeEach(() => {
+    trackEvent = jest.fn()
+    ;(useTracking as jest.Mock).mockImplementation(() => {
+      return {
+        trackEvent,
+      }
+    })
+  })
 
   it("renders correctly", async () => {
     const wrapper = await getWrapper()
@@ -83,6 +112,24 @@ describe("FairCollection", () => {
     expect(html).toContain("first.jpg")
     expect(html).toContain("second.jpg")
     expect(html).not.toContain("third.jpg")
+  })
+
+  it("tracks clicks", async () => {
+    const wrapper = await getWrapper()
+    wrapper.find(RouterLink).simulate("click")
+
+    expect(trackEvent).toHaveBeenCalledWith({
+      action: "clickedCollectionGroup",
+      context_module: "curatedHighlightsRail",
+      context_page_owner_id: "abc1234",
+      context_page_owner_slug: "miart-2020",
+      context_page_owner_type: "fair",
+      destination_page_owner_id: "xxx",
+      destination_page_owner_slug: "street-art-now",
+      destination_page_owner_type: "collection",
+      horizontal_slide_position: 2,
+      type: "thumbnail",
+    })
   })
 })
 

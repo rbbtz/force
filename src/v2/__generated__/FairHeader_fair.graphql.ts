@@ -6,7 +6,6 @@ import { FragmentRefs } from "relay-runtime";
 export type FairHeader_fair = {
     readonly about: string | null;
     readonly summary: string | null;
-    readonly formattedOpeningHours: string | null;
     readonly name: string | null;
     readonly slug: string;
     readonly profile: {
@@ -32,6 +31,7 @@ export type FairHeader_fair = {
     readonly links: string | null;
     readonly tickets: string | null;
     readonly contact: string | null;
+    readonly " $fragmentRefs": FragmentRefs<"FairTiming_fair">;
     readonly " $refType": "FairHeader_fair";
 };
 export type FairHeader_fair$data = FairHeader_fair;
@@ -43,27 +43,20 @@ export type FairHeader_fair$key = {
 
 
 const node: ReaderFragment = (function(){
-var v0 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "summary",
-  "storageKey": null
-},
+var v0 = [
+  {
+    "kind": "Literal",
+    "name": "format",
+    "value": "HTML"
+  }
+],
 v1 = {
   "alias": "src",
   "args": null,
   "kind": "ScalarField",
   "name": "url",
   "storageKey": null
-},
-v2 = [
-  {
-    "kind": "Literal",
-    "name": "format",
-    "value": "HTML"
-  }
-];
+};
 return {
   "argumentDefinitions": [],
   "kind": "Fragment",
@@ -72,18 +65,17 @@ return {
   "selections": [
     {
       "alias": null,
-      "args": null,
+      "args": (v0/*: any*/),
       "kind": "ScalarField",
       "name": "about",
-      "storageKey": null
+      "storageKey": "about(format:\"HTML\")"
     },
-    (v0/*: any*/),
     {
       "alias": null,
-      "args": null,
+      "args": (v0/*: any*/),
       "kind": "ScalarField",
-      "name": "formattedOpeningHours",
-      "storageKey": null
+      "name": "summary",
+      "storageKey": "summary(format:\"HTML\")"
     },
     {
       "alias": null,
@@ -217,7 +209,13 @@ return {
       "name": "location",
       "plural": false,
       "selections": [
-        (v0/*: any*/)
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "summary",
+          "storageKey": null
+        }
       ],
       "storageKey": null
     },
@@ -230,35 +228,40 @@ return {
     },
     {
       "alias": null,
-      "args": (v2/*: any*/),
+      "args": (v0/*: any*/),
       "kind": "ScalarField",
       "name": "hours",
       "storageKey": "hours(format:\"HTML\")"
     },
     {
       "alias": null,
-      "args": (v2/*: any*/),
+      "args": (v0/*: any*/),
       "kind": "ScalarField",
       "name": "links",
       "storageKey": "links(format:\"HTML\")"
     },
     {
       "alias": null,
-      "args": (v2/*: any*/),
+      "args": (v0/*: any*/),
       "kind": "ScalarField",
       "name": "tickets",
       "storageKey": "tickets(format:\"HTML\")"
     },
     {
       "alias": null,
-      "args": (v2/*: any*/),
+      "args": (v0/*: any*/),
       "kind": "ScalarField",
       "name": "contact",
       "storageKey": "contact(format:\"HTML\")"
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "FairTiming_fair"
     }
   ],
   "type": "Fair"
 };
 })();
-(node as any).hash = '602875de975ebad7d480faa41e409f8f';
+(node as any).hash = '2d4af2250b9d6589b6629dac5d84cff5';
 export default node;

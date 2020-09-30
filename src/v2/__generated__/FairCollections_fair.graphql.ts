@@ -6,6 +6,7 @@ import { FragmentRefs } from "relay-runtime";
 export type FairCollections_fair = {
     readonly marketingCollections: ReadonlyArray<{
         readonly id: string;
+        readonly slug: string;
         readonly " $fragmentRefs": FragmentRefs<"FairCollection_collection">;
     } | null>;
     readonly " $refType": "FairCollections_fair";
@@ -46,6 +47,13 @@ const node: ReaderFragment = {
           "storageKey": null
         },
         {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "slug",
+          "storageKey": null
+        },
+        {
           "args": null,
           "kind": "FragmentSpread",
           "name": "FairCollection_collection"
@@ -56,5 +64,5 @@ const node: ReaderFragment = {
   ],
   "type": "Fair"
 };
-(node as any).hash = 'e3bbcfd676e3a4e662ee093308eae546';
+(node as any).hash = '39e214126b8900a7d665f6628d4c2fad';
 export default node;

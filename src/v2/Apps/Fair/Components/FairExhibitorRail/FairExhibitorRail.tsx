@@ -6,6 +6,14 @@ import { useLazyLoadComponent } from "v2/Utils/Hooks/useLazyLoadComponent"
 import { FairExhibitorRailArtworksQueryRenderer as FairExhibitorRailArtworks } from "./FairExhibitorRailArtworks"
 import { FairExhibitorRailPlaceholder } from "./FairExhibitorRailPlaceholder"
 import { RouterLink } from "v2/Artsy/Router/RouterLink"
+import { useTracking } from "react-tracking"
+import {
+  ActionType,
+  ClickedArtworkGroup,
+  ContextModule,
+  OwnerType,
+} from "@artsy/cohesion"
+import { useAnalyticsContext } from "v2/Artsy/Analytics/AnalyticsContext"
 
 interface FairExhibitorRailProps extends BoxProps {
   show: FairExhibitorRail_show
@@ -24,7 +32,25 @@ export const FairExhibitorRail: React.FC<FairExhibitorRailProps> = ({
   ...rest
 }) => {
   const ref = useRef<HTMLDivElement | null>(null)
+  const tracking = useTracking()
   const { isEnteredView, Waypoint } = useLazyLoadComponent()
+  const {
+    contextPageOwnerId,
+    contextPageOwnerSlug,
+    contextPageOwnerType,
+  } = useAnalyticsContext()
+
+  const tappedViewTrackingData: ClickedArtworkGroup = {
+    context_module: ContextModule.galleryBoothRail,
+    context_page_owner_type: contextPageOwnerType,
+    context_page_owner_id: contextPageOwnerId,
+    context_page_owner_slug: contextPageOwnerSlug,
+    destination_page_owner_type: OwnerType.show,
+    destination_page_owner_id: show.internalID,
+    destination_page_owner_slug: show.slug,
+    type: "viewAll",
+    action: ActionType.clickedArtworkGroup,
+  }
 
   return (
     <>
@@ -34,7 +60,11 @@ export const FairExhibitorRail: React.FC<FairExhibitorRailProps> = ({
         <Box display="flex" mb={1}>
           <Box flex="1">
             <Text as="h3" variant="subtitle">
-              <RouterLink to={show.href} noUnderline>
+              <RouterLink
+                to={show.href}
+                noUnderline
+                onClick={() => tracking.trackEvent(tappedViewTrackingData)}
+              >
                 {show.partner.name}
               </RouterLink>
             </Text>
@@ -45,7 +75,11 @@ export const FairExhibitorRail: React.FC<FairExhibitorRailProps> = ({
           </Box>
 
           {show.href && (
-            <Text variant="subtitle" color="black60">
+            <Text
+              variant="subtitle"
+              color="black60"
+              onClick={() => tracking.trackEvent(tappedViewTrackingData)}
+            >
               <RouterLink to={show.href} noUnderline>
                 View
               </RouterLink>
@@ -71,6 +105,7 @@ export const FairExhibitorRailFragmentContainer = createFragmentContainer(
     show: graphql`
       fragment FairExhibitorRail_show on Show {
         internalID
+        slug
         href
         partner {
           ... on Partner {

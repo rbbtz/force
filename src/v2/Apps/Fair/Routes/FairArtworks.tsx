@@ -15,6 +15,9 @@ import { ColorFilter } from "v2/Components/v2/ArtworkFilter/ArtworkFilters/Color
 import { Box } from "@artsy/palette"
 import { FollowedArtistsFilter } from "v2/Components/v2/ArtworkFilter/ArtworkFilters/FollowedArtistsFilter"
 import { useSystemContext } from "v2/Artsy"
+import { useTracking } from "react-tracking"
+import { clickedMainArtworkGrid } from "@artsy/cohesion"
+import { useAnalyticsContext } from "v2/Artsy/Analytics/AnalyticsContext"
 
 interface FairArtworksFilterProps {
   fair: FairArtworks_fair
@@ -26,6 +29,12 @@ const FairArtworksFilter: React.FC<FairArtworksFilterProps> = props => {
   const { match, relay, fair } = props
   const { filtered_artworks } = fair
   const { user } = useSystemContext()
+  const tracking = useTracking()
+  const {
+    contextPageOwnerId,
+    contextPageOwnerSlug,
+    contextPageOwnerType,
+  } = useAnalyticsContext()
 
   const hasFilter = filtered_artworks && filtered_artworks.id
 
@@ -63,6 +72,17 @@ const FairArtworksFilter: React.FC<FairArtworksFilterProps> = props => {
         { value: "year", text: "Artwork year (asc.)" },
       ]}
       onChange={updateUrl}
+      onArtworkBrickClick={artwork => {
+        tracking.trackEvent(
+          clickedMainArtworkGrid({
+            contextPageOwnerType,
+            contextPageOwnerSlug,
+            contextPageOwnerId,
+            destinationPageOwnerId: artwork.internalID,
+            destinationPageOwnerSlug: artwork.slug,
+          })
+        )
+      }}
     >
       <BaseArtworkFilter
         relay={relay}
@@ -99,6 +119,8 @@ export const FairArtworksRefetchContainer = createRefetchContainer(
           sort: { type: "String", defaultValue: "-partner_updated_at" }
           shouldFetchCounts: { type: "Boolean", defaultValue: false }
         ) {
+        slug
+        internalID
         filtered_artworks: filterArtworksConnection(
           acquireable: $acquireable
           aggregations: $aggregations

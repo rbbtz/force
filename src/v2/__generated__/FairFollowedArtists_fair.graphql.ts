@@ -3,22 +3,21 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type FairExhibitorRailArtworks_show = {
-    readonly artworks: {
+export type FairFollowedArtists_fair = {
+    readonly slug: string;
+    readonly followedArtistArtworks: {
         readonly edges: ReadonlyArray<{
             readonly artwork: {
-                readonly internalID: string;
-                readonly slug: string;
                 readonly " $fragmentRefs": FragmentRefs<"FillwidthItem_artwork">;
             } | null;
         } | null> | null;
     } | null;
-    readonly " $refType": "FairExhibitorRailArtworks_show";
+    readonly " $refType": "FairFollowedArtists_fair";
 };
-export type FairExhibitorRailArtworks_show$data = FairExhibitorRailArtworks_show;
-export type FairExhibitorRailArtworks_show$key = {
-    readonly " $data"?: FairExhibitorRailArtworks_show$data;
-    readonly " $fragmentRefs": FragmentRefs<"FairExhibitorRailArtworks_show">;
+export type FairFollowedArtists_fair$data = FairFollowedArtists_fair;
+export type FairFollowedArtists_fair$key = {
+    readonly " $data"?: FairFollowedArtists_fair$data;
+    readonly " $fragmentRefs": FragmentRefs<"FairFollowedArtists_fair">;
 };
 
 
@@ -27,26 +26,38 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "FairExhibitorRailArtworks_show",
+  "name": "FairFollowedArtists_fair",
   "selections": [
     {
-      "alias": "artworks",
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "slug",
+      "storageKey": null
+    },
+    {
+      "alias": "followedArtistArtworks",
       "args": [
         {
           "kind": "Literal",
           "name": "first",
           "value": 20
+        },
+        {
+          "kind": "Literal",
+          "name": "includeArtworksByFollowedArtists",
+          "value": true
         }
       ],
-      "concreteType": "ArtworkConnection",
+      "concreteType": "FilterArtworksConnection",
       "kind": "LinkedField",
-      "name": "artworksConnection",
+      "name": "filterArtworksConnection",
       "plural": false,
       "selections": [
         {
           "alias": null,
           "args": null,
-          "concreteType": "ArtworkEdge",
+          "concreteType": "FilterArtworksEdge",
           "kind": "LinkedField",
           "name": "edges",
           "plural": true,
@@ -60,20 +71,6 @@ const node: ReaderFragment = {
               "plural": false,
               "selections": [
                 {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "internalID",
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "slug",
-                  "storageKey": null
-                },
-                {
                   "args": null,
                   "kind": "FragmentSpread",
                   "name": "FillwidthItem_artwork"
@@ -85,10 +82,10 @@ const node: ReaderFragment = {
           "storageKey": null
         }
       ],
-      "storageKey": "artworksConnection(first:20)"
+      "storageKey": "filterArtworksConnection(first:20,includeArtworksByFollowedArtists:true)"
     }
   ],
-  "type": "Show"
+  "type": "Fair"
 };
-(node as any).hash = '30c2338aa32b73b3949ac6bfb1955657';
+(node as any).hash = 'f2a46b7155c7bf542cc4b9a10fb4fa5e';
 export default node;

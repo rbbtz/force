@@ -1219,8 +1219,10 @@ type Artwork implements Node & Searchable & Sellable {
   description(format: Format): String
   dimensions: dimensions
   displayLabel: String
+  editionNumber: String
   editionOf: String
   editionSets(sort: EditionSetSorts): [EditionSet]
+  editionSize: String
 
   # Returns an HTML string representing the embedded content (video)
   embed(autoplay: Boolean = false, height: Int = 450, width: Int = 853): String
@@ -1254,6 +1256,9 @@ type Artwork implements Node & Searchable & Sellable {
   images(size: Int): [Image]
   imageTitle: String
   imageUrl: String
+
+  # Structured questions a collector can inquire on about this work
+  inquiryQuestions: [InquiryQuestion]
 
   # A type-specific ID likely used as a database ID.
   internalID: ID!
@@ -5287,7 +5292,7 @@ type ExternalPartner {
 }
 
 type Fair implements EntityWithFilterArtworksConnectionInterface & Node {
-  about: String
+  about(format: Format): String
   activeStartAt(
     format: String
 
@@ -5432,7 +5437,7 @@ type Fair implements EntityWithFilterArtworksConnectionInterface & Node {
     # A tz database time zone, otherwise falls back to `X-TIMEZONE` header
     timezone: String
   ): String
-  summary: String
+  summary(format: Format): String
   tagline: String
   tickets(format: Format): String
   ticketsLink: String
@@ -6398,6 +6403,15 @@ type Image {
 
 type ImageURLs {
   normalized: String
+}
+
+type InquiryQuestion {
+  # A globally unique ID.
+  id: ID!
+
+  # A type-specific ID.
+  internalID: ID!
+  question: String!
 }
 
 enum Intents {
@@ -7427,7 +7441,7 @@ input MyCollectionUpdateArtworkInput {
   costMinor: Int
   date: String
   depth: String
-  editionNumber: Int
+  editionNumber: String
   editionSize: String
   height: String
   medium: String

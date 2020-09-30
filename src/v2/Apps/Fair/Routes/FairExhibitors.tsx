@@ -1,3 +1,4 @@
+import { ActionType, ClickedShowMore, ContextModule } from "@artsy/cohesion"
 import { Button, Col, Grid, Row } from "@artsy/palette"
 import React, { useState } from "react"
 import {
@@ -5,6 +6,8 @@ import {
   createPaginationContainer,
   graphql,
 } from "react-relay"
+import { useTracking } from "react-tracking"
+import { useAnalyticsContext } from "v2/Artsy/Analytics/AnalyticsContext"
 import { FairExhibitors_fair } from "v2/__generated__/FairExhibitors_fair.graphql"
 import { FairExhibitorRailFragmentContainer as FairExhibitorRail } from "../Components/FairExhibitorRail"
 
@@ -15,9 +18,26 @@ interface FairExhibitorsProps {
 
 const FairExhibitors: React.FC<FairExhibitorsProps> = ({ fair, relay }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const tracking = useTracking()
+  const {
+    contextPageOwnerId,
+    contextPageOwnerSlug,
+    contextPageOwnerType,
+  } = useAnalyticsContext()
+
+  const clickShowMoreTrackingData: ClickedShowMore = {
+    context_module: ContextModule.exhibitorsTab,
+    context_page_owner_type: contextPageOwnerType,
+    context_page_owner_id: contextPageOwnerId,
+    context_page_owner_slug: contextPageOwnerSlug,
+    subject: "Show More",
+    action: ActionType.clickedShowMore,
+  }
 
   const handleClick = () => {
     if (!relay.hasMore() || relay.isLoading()) return
+
+    tracking.trackEvent(clickShowMoreTrackingData)
 
     setIsLoading(true)
 
@@ -70,6 +90,7 @@ export const FairExhibitorsFragmentContainer = createPaginationContainer(
           after: { type: "String" }
         ) {
         slug
+        internalID
         exhibitors: showsConnection(
           first: $first
           after: $after

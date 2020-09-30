@@ -15,7 +15,9 @@ export type FairHeader_QueryRawResponse = {
     readonly fair: ({
         readonly about: string | null;
         readonly summary: string | null;
-        readonly formattedOpeningHours: string | null;
+        readonly exhibitionPeriod: string | null;
+        readonly startAt: string | null;
+        readonly endAt: string | null;
         readonly name: string | null;
         readonly slug: string;
         readonly profile: ({
@@ -65,9 +67,9 @@ query FairHeader_Query(
 }
 
 fragment FairHeader_fair on Fair {
-  about
-  summary
-  formattedOpeningHours
+  about(format: HTML)
+  summary(format: HTML)
+  ...FairTiming_fair
   name
   slug
   profile {
@@ -96,6 +98,12 @@ fragment FairHeader_fair on Fair {
   tickets(format: HTML)
   contact(format: HTML)
 }
+
+fragment FairTiming_fair on Fair {
+  exhibitionPeriod
+  startAt
+  endAt
+}
 */
 
 const node: ConcreteRequest = (function(){
@@ -114,13 +122,13 @@ v1 = [
     "variableName": "slug"
   }
 ],
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "summary",
-  "storageKey": null
-},
+v2 = [
+  {
+    "kind": "Literal",
+    "name": "format",
+    "value": "HTML"
+  }
+],
 v3 = {
   "alias": "src",
   "args": null,
@@ -134,14 +142,7 @@ v4 = {
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
-},
-v5 = [
-  {
-    "kind": "Literal",
-    "name": "format",
-    "value": "HTML"
-  }
-];
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -184,17 +185,37 @@ return {
         "selections": [
           {
             "alias": null,
-            "args": null,
+            "args": (v2/*: any*/),
             "kind": "ScalarField",
             "name": "about",
-            "storageKey": null
+            "storageKey": "about(format:\"HTML\")"
           },
-          (v2/*: any*/),
+          {
+            "alias": null,
+            "args": (v2/*: any*/),
+            "kind": "ScalarField",
+            "name": "summary",
+            "storageKey": "summary(format:\"HTML\")"
+          },
           {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
-            "name": "formattedOpeningHours",
+            "name": "exhibitionPeriod",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "startAt",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "endAt",
             "storageKey": null
           },
           {
@@ -330,7 +351,13 @@ return {
             "name": "location",
             "plural": false,
             "selections": [
-              (v2/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "summary",
+                "storageKey": null
+              },
               (v4/*: any*/)
             ],
             "storageKey": null
@@ -344,28 +371,28 @@ return {
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v2/*: any*/),
             "kind": "ScalarField",
             "name": "hours",
             "storageKey": "hours(format:\"HTML\")"
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v2/*: any*/),
             "kind": "ScalarField",
             "name": "links",
             "storageKey": "links(format:\"HTML\")"
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v2/*: any*/),
             "kind": "ScalarField",
             "name": "tickets",
             "storageKey": "tickets(format:\"HTML\")"
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v2/*: any*/),
             "kind": "ScalarField",
             "name": "contact",
             "storageKey": "contact(format:\"HTML\")"
@@ -381,7 +408,7 @@ return {
     "metadata": {},
     "name": "FairHeader_Query",
     "operationKind": "query",
-    "text": "query FairHeader_Query(\n  $slug: String!\n) {\n  fair(id: $slug) {\n    ...FairHeader_fair\n    id\n  }\n}\n\nfragment FairHeader_fair on Fair {\n  about\n  summary\n  formattedOpeningHours\n  name\n  slug\n  profile {\n    icon {\n      cropped(width: 120, height: 120, version: \"square140\") {\n        src: url\n      }\n    }\n    id\n  }\n  image {\n    cropped(width: 750, height: 1000, version: \"wide\") {\n      src: url\n      width\n      height\n    }\n  }\n  tagline\n  location {\n    summary\n    id\n  }\n  ticketsLink\n  hours(format: HTML)\n  links(format: HTML)\n  tickets(format: HTML)\n  contact(format: HTML)\n}\n"
+    "text": "query FairHeader_Query(\n  $slug: String!\n) {\n  fair(id: $slug) {\n    ...FairHeader_fair\n    id\n  }\n}\n\nfragment FairHeader_fair on Fair {\n  about(format: HTML)\n  summary(format: HTML)\n  ...FairTiming_fair\n  name\n  slug\n  profile {\n    icon {\n      cropped(width: 120, height: 120, version: \"square140\") {\n        src: url\n      }\n    }\n    id\n  }\n  image {\n    cropped(width: 750, height: 1000, version: \"wide\") {\n      src: url\n      width\n      height\n    }\n  }\n  tagline\n  location {\n    summary\n    id\n  }\n  ticketsLink\n  hours(format: HTML)\n  links(format: HTML)\n  tickets(format: HTML)\n  contact(format: HTML)\n}\n\nfragment FairTiming_fair on Fair {\n  exhibitionPeriod\n  startAt\n  endAt\n}\n"
   }
 };
 })();

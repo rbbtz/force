@@ -4,6 +4,14 @@ import { FairEditorialItem_article } from "v2/__generated__/FairEditorialItem_ar
 import { Box, Text } from "@artsy/palette"
 import { RouterLink } from "v2/Artsy/Router/RouterLink"
 import styled from "styled-components"
+import { useTracking } from "react-tracking"
+import {
+  ActionType,
+  ClickedArticleGroup,
+  ContextModule,
+  OwnerType,
+} from "@artsy/cohesion"
+import { useAnalyticsContext } from "v2/Artsy/Analytics/AnalyticsContext"
 
 const Container = styled(RouterLink)`
   display: flex;
@@ -23,10 +31,31 @@ interface FairEditorialItemProps {
 export const FairEditorialItem: React.FC<FairEditorialItemProps> = ({
   article,
 }) => {
+  const tracking = useTracking()
+
+  const {
+    contextPageOwnerId,
+    contextPageOwnerSlug,
+    contextPageOwnerType,
+  } = useAnalyticsContext()
+
+  const clickedArticleTrackingData: ClickedArticleGroup = {
+    context_module: ContextModule.relatedArticles,
+    context_page_owner_type: contextPageOwnerType,
+    context_page_owner_id: contextPageOwnerId,
+    context_page_owner_slug: contextPageOwnerSlug,
+    destination_page_owner_type: OwnerType.article,
+    destination_page_owner_id: article.internalID,
+    destination_page_owner_slug: article.slug,
+    type: "thumbnail",
+    action: ActionType.clickedArticleGroup,
+  }
+
   return (
     <Container
       to={article.href}
       aria-label={`${article.title} (${article.publishedAt})`}
+      onClick={() => tracking.trackEvent(clickedArticleTrackingData)}
     >
       <Box flex="1" pr={3}>
         <Text variant="subtitle" as="h4" mb={0.5}>
@@ -63,9 +92,11 @@ export const FairEditorialItemFragmentContainer = createFragmentContainer(
     article: graphql`
       fragment FairEditorialItem_article on Article {
         id
+        internalID
+        slug
         title
         href
-        publishedAt(format: "MMM Do, YY")
+        publishedAt(format: "MMM Do, YYYY")
         thumbnailTitle
         thumbnailImage {
           _1x: cropped(width: 140, height: 80) {

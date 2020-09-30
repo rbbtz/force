@@ -16,8 +16,14 @@ export const FairCollections: React.FC<FairCollectionsProps> = ({
   return (
     <Box {...rest}>
       <Carousel>
-        {fair.marketingCollections.map(collection => {
-          return <FairCollection key={collection.id} collection={collection} />
+        {fair.marketingCollections.map((collection, index) => {
+          return (
+            <FairCollection
+              key={collection.id}
+              collection={collection}
+              carouselIndex={index}
+            />
+          )
         })}
       </Carousel>
     </Box>
@@ -31,6 +37,7 @@ export const FairCollectionsFragmentContainer = createFragmentContainer(
       fragment FairCollections_fair on Fair {
         marketingCollections(size: 4) {
           id
+          slug
           ...FairCollection_collection
         }
       }

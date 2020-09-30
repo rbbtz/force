@@ -5,6 +5,7 @@ import {
   Col,
   Flex,
   Grid,
+  HTML,
   ResponsiveBox,
   ResponsiveBoxProps,
   Row,
@@ -15,6 +16,7 @@ import { createFragmentContainer, graphql } from "react-relay"
 import { FairHeader_fair } from "v2/__generated__/FairHeader_fair.graphql"
 import styled from "styled-components"
 import { ForwardLink } from "v2/Components/Links/ForwardLink"
+import { FairTimingFragmentContainer as FairTiming } from "./FairTiming"
 
 interface FairHeaderProps extends BoxProps {
   fair: FairHeader_fair
@@ -94,15 +96,12 @@ const FairHeader: React.FC<FairHeaderProps> = ({ fair, ...rest }) => {
             <Text as="h1" variant="largeTitle">
               {fair.name}
             </Text>
-            <Text variant="text" color="black60">
-              {fair.formattedOpeningHours}
-            </Text>
+
+            <FairTiming fair={fair} />
           </Col>
 
           <Col sm="6" mt={[3, 0]}>
-            <Text variant="subtitle" lineHeight="body">
-              {previewText}
-            </Text>
+            <HTML variant="subtitle" html={previewText} />
 
             {canShowMoreInfoLink && (
               <ForwardLink
@@ -120,9 +119,9 @@ const FairHeader: React.FC<FairHeaderProps> = ({ fair, ...rest }) => {
 export const FairHeaderFragmentContainer = createFragmentContainer(FairHeader, {
   fair: graphql`
     fragment FairHeader_fair on Fair {
-      about
-      summary
-      formattedOpeningHours
+      about(format: HTML)
+      summary(format: HTML)
+      ...FairTiming_fair
       name
       slug
       profile {

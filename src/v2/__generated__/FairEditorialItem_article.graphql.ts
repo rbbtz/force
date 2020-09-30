@@ -5,6 +5,8 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type FairEditorialItem_article = {
     readonly id: string;
+    readonly internalID: string;
+    readonly slug: string | null;
     readonly title: string | null;
     readonly href: string | null;
     readonly publishedAt: string | null;
@@ -72,6 +74,20 @@ return {
       "alias": null,
       "args": null,
       "kind": "ScalarField",
+      "name": "internalID",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "slug",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
       "name": "title",
       "storageKey": null
     },
@@ -88,12 +104,12 @@ return {
         {
           "kind": "Literal",
           "name": "format",
-          "value": "MMM Do, YY"
+          "value": "MMM Do, YYYY"
         }
       ],
       "kind": "ScalarField",
       "name": "publishedAt",
-      "storageKey": "publishedAt(format:\"MMM Do, YY\")"
+      "storageKey": "publishedAt(format:\"MMM Do, YYYY\")"
     },
     {
       "alias": null,
@@ -159,5 +175,5 @@ return {
   "type": "Article"
 };
 })();
-(node as any).hash = '7ae77e7305447798221c7b205b4f0411';
+(node as any).hash = '9f2f76095c49af57942fadf67d481f63';
 export default node;
