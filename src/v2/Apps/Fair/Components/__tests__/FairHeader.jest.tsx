@@ -58,7 +58,7 @@ describe("FairHeader", () => {
       .find(RouterLink)
       .filterWhere(t => t.text() === "More info")
     expect(MoreInfoButton.length).toEqual(1)
-    expect(MoreInfoButton.first().prop("to")).toEqual("/fair2/miart-2020/info")
+    expect(MoreInfoButton.first().prop("to")).toEqual("/fair/miart-2020/info")
   })
 
   it("doesn't display the More info link if there is no info", async () => {
@@ -123,11 +123,18 @@ const FairHeaderFixture: FairHeader_QueryRawResponse = {
     startAt: "2020-08-19T08:00:00+00:00",
     endAt: "2020-09-19T08:00:00+00:00",
     image: {
-      cropped: {
+      _1x: {
         src: "https://cloudfront.com/square.jpg",
         width: 100,
         height: 400,
       },
+      _2x: {
+        src: "https://cloudfront.com/square.jpg",
+      },
+      md_1x: { src: "https://cloudfront.com/square.jpg" },
+      md_2x: { src: "https://cloudfront.com/square.jpg" },
+      lg_1x: { src: "https://cloudfront.com/square.jpg" },
+      lg_2x: { src: "https://cloudfront.com/square.jpg" },
     },
     tagline: "",
     location: null,
@@ -140,7 +147,10 @@ const FairHeaderFixture: FairHeader_QueryRawResponse = {
     profile: {
       id: "profile",
       icon: {
-        cropped: {
+        _1x: {
+          src: "/path/to/cats.jpg",
+        },
+        _2x: {
           src: "/path/to/cats.jpg",
         },
       },

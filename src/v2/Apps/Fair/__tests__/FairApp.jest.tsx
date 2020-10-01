@@ -20,11 +20,18 @@ const FAIR_APP_FIXTURE: FairApp_QueryRawResponse = {
     startAt: "2020-08-19T08:00:00+00:00",
     endAt: "2020-09-19T08:00:00+00:00",
     image: {
-      cropped: {
+      _1x: {
         src: "https://cloudfront.com/square.jpg",
         width: 100,
         height: 400,
       },
+      _2x: {
+        src: "https://cloudfront.com/square.jpg",
+      },
+      md_1x: { src: "https://cloudfront.com/square.jpg" },
+      md_2x: { src: "https://cloudfront.com/square.jpg" },
+      lg_1x: { src: "https://cloudfront.com/square.jpg" },
+      lg_2x: { src: "https://cloudfront.com/square.jpg" },
     },
     tagline: "",
     location: null,
@@ -41,7 +48,10 @@ const FAIR_APP_FIXTURE: FairApp_QueryRawResponse = {
     profile: {
       id: "profile",
       icon: {
-        cropped: {
+        _1x: {
+          src: "/path/to/cats.jpg",
+        },
+        _2x: {
           src: "/path/to/cats.jpg",
         },
       },
