@@ -22,10 +22,10 @@
     qs "5.2.0"
     underscore "*"
 
-"@artsy/cohesion@1.40.0":
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.40.0.tgz#a7b543d4049f35207da867fc2b562dcd65364b82"
-  integrity sha512-O2AJ6yfTcb/WITDmZWL5vBfF8QT/VNx2AS8pXvtbruuKdybTin0cAG4mWJdRzdv6fEFzbaqjogEYTYq5fq5yKg==
+"@artsy/cohesion@1.41.0":
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/@artsy/cohesion/-/cohesion-1.41.0.tgz#02dce62cb373798b556ae09320d5f0ae32ec8f74"
+  integrity sha512-Q9uzquKwmhlx2nQ8MlRJ6i0s7hPgkmzbwPJ9SyOIR4cwXz2+lqvSLA+LgIKL411TwJ6lhAG5TNbVW+qFAUmLnQ==
 
 "@artsy/detect-responsive-traits@^0.0.5":
   version "0.0.5"
@@ -53,10 +53,10 @@
   dependencies:
     uuid "^8.3.0"
 
-"@artsy/palette@13.7.5":
-  version "13.7.5"
-  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-13.7.5.tgz#ef4ce03e9a3b7ae28fa10c09ed5b246781eafb98"
-  integrity sha512-MunNqOZUGNMIiUbmfV3q3gUrSUwKpVPsYpvZGSd9CUXs68kGqcZPVSeQNB9Gh863lbaXcISWc33cRJNm3cWpog==
+"@artsy/palette@13.8.0":
+  version "13.8.0"
+  resolved "https://registry.yarnpkg.com/@artsy/palette/-/palette-13.8.0.tgz#a6d31a33d5befc921b6f3ecc54a94fd9f11c32eb"
+  integrity sha512-dNnyLg/E3dHqExtCTnxRbELhHZSBZZlJtps9FBOO64yiMWODnLJBt5RtsPSFzWWGVX3xL/JwNb0D5PwlfmwC/g==
   dependencies:
     "@styled-system/theme-get" "^5.1.2"
     babel-plugin-styled-components "^1.10.0"
@@ -17965,7 +17965,6 @@ pascalcase@^0.1.1:
 
 "passport-apple@https://github.com/artsy/passport-apple#f41adb7822c8344b72bc36a7d68312f6592cb14f":
   version "1.1.2"
-  uid f41adb7822c8344b72bc36a7d68312f6592cb14f
   resolved "https://github.com/artsy/passport-apple#f41adb7822c8344b72bc36a7d68312f6592cb14f"
   dependencies:
     jsonwebtoken "^8.5.1"
@@ -20390,6 +20389,15 @@ relay-runtime@9.1.0:
   dependencies:
     "@babel/runtime" "^7.0.0"
     fbjs "^1.0.0"
+
+relay-test-utils@9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/relay-test-utils/-/relay-test-utils-9.1.0.tgz#b516a96c47f905e73f5a577df24d0195f2a65ea6"
+  integrity sha512-fTgtLbV/7nXD9u/Ujevc9ohRaZpsQBtvJogh076bUB+Vcvv4G9TQ1oZLKLXxJTBcnQEEzrgzLHGjrxVGRb548A==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    fbjs "^1.0.0"
+    relay-runtime "9.1.0"
 
 release-zalgo@^1.0.0:
   version "1.0.0"
